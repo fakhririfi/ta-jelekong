@@ -14,9 +14,7 @@ use Whoops\Run;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'EventController@index_customer')->name('customer.events.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -32,11 +30,15 @@ Route::get('/blank', function () {
 })->name('blank');
 
 
-//create middle ware
-Route::group(['middleware' => 'auth'], function() {
+//create group prefix for events customer
+Route::group(['prefix' => 'events'], function () {
+    Route::get('/{id}', 'EventController@show_customer')->name('customer.events.show');
+});
 
-    //create group prefix for admin
-    Route::group(['prefix'=>'admin'], function() {
+//create middle ware
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix' => 'admin'], function () {
 
         Route::resource('events', EventController::class);
 

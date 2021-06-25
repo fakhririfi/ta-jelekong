@@ -119,6 +119,7 @@
                 </form>
 
                 <!-- Topbar Navbar -->
+                @if(Auth::check())
                 <ul class="navbar-nav ml-auto">
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -277,7 +278,7 @@
                     </li>
 
                 </ul>
-
+                @endif   
             </nav>
             <!-- End of Topbar -->
 
@@ -296,7 +297,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Alejandro RH 2020</span>
+                <span>Copyright &copy; Jelekong {{ date('Y') }}</span>
                 </div>
             </div>
         </footer>
@@ -312,6 +313,7 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
+if(Auth::check())
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -334,6 +336,7 @@
     </div>
 </div>
 
+@endif
 <!-- Scripts -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
