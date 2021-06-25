@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Whoops\Run;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +30,15 @@ Route::get('/about', function () {
 Route::get('/blank', function () {
     return view('blank');
 })->name('blank');
+
+
+//create middle ware
+Route::group(['middleware' => 'auth'], function() {
+
+    //create group prefix for admin
+    Route::group(['prefix'=>'admin'], function() {
+
+        Route::resource('events', EventController::class);
+
+    });
+});
