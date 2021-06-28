@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -48,8 +50,10 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+    
     {
-        //
+        return view('admin.events.create');
+        
     }
 
     /**
@@ -60,7 +64,37 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'time' => 'required',
+            'location' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'quota' => 'required',
+            'image' => 'required',
+        ]);
+
+        $path = $request->file('image')->store('events', 'public');
+
+        $event = Event::create([
+            'name' => $request->name,
+            'time' => Carbon::parse($request->time),
+            'location' => $request->location,
+            'description' => $request->description,
+            'price' => $request->price,
+            'quota' => $request->quota,
+            'image' => $path
+        ]);
+
+        if ($event) {
+            return redirect()->back()->with([
+                'success' => 'Berhasil Menyimpan'
+            ]);
+        } else {
+            return redirect()->back()->withErrors([
+                'error' => 'Gagal Menyimpan Data'
+            ]);
+        }
     }
 
     /**
