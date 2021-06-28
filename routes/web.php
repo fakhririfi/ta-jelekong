@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use Whoops\Run;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +29,6 @@ Route::get('/blank', function () {
     return view('blank');
 })->name('blank');
 
-
 //create group prefix for events customer
 Route::group(['prefix' => 'events'], function () {
     Route::get('/{id}', 'EventController@show_customer')->name('customer.events.show');
@@ -37,10 +36,8 @@ Route::group(['prefix' => 'events'], function () {
 
 //create middle ware
 Route::group(['middleware' => 'auth'], function () {
-
+    //create group prefix for admin
     Route::group(['prefix' => 'admin'], function () {
-
         Route::resource('events', EventController::class);
-
     });
 });
