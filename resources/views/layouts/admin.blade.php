@@ -278,7 +278,7 @@
                     </li>
 
                 </ul>
-                @endif   
+                @endif
             </nav>
             <!-- End of Topbar -->
 
@@ -336,7 +336,7 @@ if(Auth::check())
     </div>
 </div>
 
-@endif
+
 <!-- Scripts -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>

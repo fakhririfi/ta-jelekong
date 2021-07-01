@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ScheduleController;
 
 use Whoops\Run;
 /*
@@ -44,3 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 });
+
+//calendar
+Route::get('schedule', [ScheduleController::class, 'index']);
+Route::post('shceduleAjax', [ScheduleController::class, 'ajax']);
