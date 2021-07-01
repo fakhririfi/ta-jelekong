@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,13 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::count();
 
-        $widget = [
-            'users' => $users,
-            //...
-        ];
+        if(Auth::check()){
+            return redirect(route('events.index'));
+        }
 
-        return view('home', compact('widget'));
     }
 }
