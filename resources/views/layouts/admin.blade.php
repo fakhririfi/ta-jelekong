@@ -43,7 +43,6 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Profile -->
-        @if(Auth::check())
         <li class="nav-item {{ Nav::isRoute('events.*') }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-list"></i>
@@ -56,19 +55,6 @@
                 </div>
             </div>
         </li>
-        @else
-        <li class="nav-item {{ Nav::isRoute('events.*') }}">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-list"></i>
-                <span>Events</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="{{ route('customer.events.index') }}">List Event</a>
-                </div>
-            </div>
-        </li>
-        @endif
 
         <!-- <li class="nav-item {{ Nav::isRoute('profile') }}">
             <a class="nav-link" href="{{ route('profile') }}">
