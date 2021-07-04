@@ -30,9 +30,9 @@ class EventController extends Controller
      */
     public function index_customer()
     {
-        $current_events = Event::whereBetween('time', [Carbon::now(), Carbon::now()->addWeek(1)])->get();
-        $future_events = Event::where('time', '>', Carbon::now()->addWeek(1))->get();
-
+        $current_events = Event::whereBetween('time', [Carbon::now()->startOfDay()->toDateTimeString(), Carbon::now()->addWeek(1)->startOfDay()->toDateTimeString()])->get();
+        $future_events = Event::where('time', '>', Carbon::now()->addWeek(1)->startOfDay()->toDateTimeString())->get();
+// dd(Carbon::now()->addWeek(1)->startOfDay()->toDateTimeString()); 
         return view('customer.events.index')->with([
             'current_events' => $current_events,
             'future_events' => $future_events,
@@ -100,6 +100,22 @@ class EventController extends Controller
     public function show(Event $event)
     {
         //
+    }
+
+    /**
+     * Display the specified resource for customer.
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function show_customer($id)
+    {
+
+        $event = Event::find($id);
+
+        return view('customer.events.show')->with([
+            'event' => $event
+        ]);
     }
 
     /**
