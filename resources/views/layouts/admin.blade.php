@@ -141,7 +141,7 @@
                     </li>
 
                 </ul>
-                @endif                    
+                @endif
             </nav>
             <!-- End of Topbar -->
 
