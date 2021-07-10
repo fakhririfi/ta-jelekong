@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ScheduleController;
 
+use Whoops\Run;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'EventController@index_customer')->name('customer.events.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -30,6 +30,22 @@ Route::get('/blank', function () {
     return view('blank');
 })->name('blank');
 
-Route::get('/schedule', function () {
-    return view('schedule');
-})->name('schedule');
+
+//create group prefix for events customer
+Route::group(['prefix' => 'events'], function () {
+    Route::get('/{id}', 'EventController@show_customer')->name('customer.events.show');
+});
+
+//create middle ware
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix' => 'admin'], function () {
+
+        Route::resource('events', EventController::class);
+
+    });
+});
+
+//calendar
+Route::get('schedule', [ScheduleController::class, 'index']);
+Route::post('shceduleAjax', [ScheduleController::class, 'ajax']);

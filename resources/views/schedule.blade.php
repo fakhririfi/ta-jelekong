@@ -1,11 +1,13 @@
-@extends('layouts.admin')
+
+@extends('layouts.calendaradmin')
 
 @section('main-content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Schedule') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('Calendar') }}</h1>
 
     <!-- Main Content goes here -->
 
+    <div id='calendar'></div>
 
     <!-- End of Main Content -->
 @endsection
@@ -26,3 +28,5 @@
         </div>
     @endif
 @endpush
+
+
