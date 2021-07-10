@@ -30,9 +30,9 @@ class EventController extends Controller
      */
     public function index_customer()
     {
-        $current_events = Event::whereBetween('time', [Carbon::now()->startOfDay()->toDateTimeString(), Carbon::now()->addWeek(1)->startOfDay()->toDateTimeString()])->get();
-        $future_events = Event::where('time', '>', Carbon::now()->addWeek(1)->startOfDay()->toDateTimeString())->get();
-// dd(Carbon::now()->addWeek(1)->startOfDay()->toDateTimeString()); 
+        $current_events = Event::whereBetween('time', [Carbon::now(), Carbon::now()->addWeek(1)])->get();
+        $future_events = Event::where('time', '>', Carbon::now()->addWeek(1))->get();
+
         return view('customer.events.index')->with([
             'current_events' => $current_events,
             'future_events' => $future_events,
@@ -66,6 +66,7 @@ class EventController extends Controller
             'price' => 'required',
             'quota' => 'required',
             'image' => 'required',
+            'organizer' => 'required'
         ]);
 
         $path = $request->file('image')->store('events', 'public');
@@ -77,6 +78,7 @@ class EventController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'quota' => $request->quota,
+            'organizer' => $request->organizer,
             'image' => $path
         ]);
 
@@ -152,6 +154,7 @@ class EventController extends Controller
             'time' => 'required',
             'location' => 'required',
             'description' => 'required',
+            'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
         ]);
@@ -167,6 +170,7 @@ class EventController extends Controller
             'location' => $request->location,
             'description' => $request->description,
             'price' => $request->price,
+            'organizer' => $request->organizer,
             'quota' => $request->quota,
             'image' => $path
         ]);

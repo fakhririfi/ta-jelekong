@@ -15,6 +15,10 @@
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
             <h3 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
             <p>
+                <span class="font-weight-bold">Penyelenggara: </span>
+                {{ $event->organizer }}
+            </p>
+            <p>
                 <span class="font-weight-bold">Harga Tiket: </span>
                 Rp. {{ number_format($event->price, 0, ',', '.') }}
             </p>
