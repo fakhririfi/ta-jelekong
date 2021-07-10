@@ -28,7 +28,7 @@
                 <span class="font-weight-bold">Kuota: </span>
                 {{ $event->quota }}
             </p>
-            <a href="#" class="btn btn-primary w-50 font-weight-bold p-3">
+            <a href="#" class="btn btn-primary w-50 font-weight-bold p-3 {{ $event->quota <= 0 ? 'disabled' : '' }}" {{ $event->quota <= 0 ? 'disabled' : '' }}>
                 Pesan
             </a>
         </div>
