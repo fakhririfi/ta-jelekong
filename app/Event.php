@@ -20,6 +20,7 @@ class Event extends Model
         'quota',
         'image',
         'organizer',
-        'category'
+        'category',
+        'contact_person'
     ];
 }

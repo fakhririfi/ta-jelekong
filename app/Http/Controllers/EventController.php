@@ -108,6 +108,7 @@ class EventController extends Controller
             'description' => 'required',
             'price' => 'required',
             'category' => 'required',
+            'contact_person' => 'required',
             'quota' => 'required',
             'image' => 'required',
             'organizer' => 'required'
@@ -122,6 +123,7 @@ class EventController extends Controller
             'location' => $request->location,
             'description' => $request->description,
             'price' => $request->price,
+            'contact_person' => $request->contact_person,
             'quota' => $request->quota,
             'organizer' => $request->organizer,
             'image' => $path
@@ -200,6 +202,7 @@ class EventController extends Controller
             'location' => 'required',
             'description' => 'required',
             'category' => 'required',
+            'contact_person' => 'required',
             'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
@@ -217,6 +220,7 @@ class EventController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'category' => $request->category,
+            'contact_person' => $request->contact_person,
             'organizer' => $request->organizer,
             'quota' => $request->quota,
             'image' => $path

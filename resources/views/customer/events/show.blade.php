@@ -11,12 +11,16 @@
         <div class="col-sm-6 overflow-hidden" style="height: 400px;">
             <img src="{{ Storage::url($event->image) }}" class="w-100" style="object-fit: cover;">
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" style="text-align: justify;">
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
             <h3 class="font-weight-bold">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h3>
             <p>
                 <span class="font-weight-bold">Penyelenggara: </span>
                 {{ $event->organizer }}
+            </p>
+            <p>
+                <span class="font-weight-bold">Contact Person: </span>
+                {{ $event->contact_person }}
             </p>
             <p>
                 <span class="font-weight-bold">Harga Tiket: </span>
