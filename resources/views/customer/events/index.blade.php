@@ -14,14 +14,14 @@
         <div class="owl-carousel col-12">
             @foreach($current_events as $event)
 
-            <div class="relative">
+            <div class="card" style="width: 23rem;">
                 <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
-                    <div class="text-white ml-3" style="position:absolute; bottom: 0; left: 0;">
-                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h3 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
+                    <div class="overflow-hidden" style="height: 200px;">
+                        <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
                     </div>
-                    <div class="overflow-hidden" style="height: 350px; width: 350px;">
-                        <img src="{{ Storage::url($event->image) }}" class="h-100" style="object-fit: cover;">
+                    <div class="card-body">
+                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
+                        <h5 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h5>
                     </div>
                 </a>
             </div>
@@ -37,14 +37,14 @@
         <div class="owl-carousel col-12">
             @foreach($future_events as $event)
 
-            <div class="relative">
+            <div class="card" style="width: 23rem;">
                 <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
-                    <div class="text-white ml-3" style="position:absolute; bottom: 0; left: 0;">
-                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h3 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
+                    <div class="overflow-hidden" style="height: 200px;">
+                        <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
                     </div>
-                    <div class="overflow-hidden" style="height: 350px; width: 350px;">
-                        <img src="{{ Storage::url($event->image) }}" class="h-100" style="object-fit: cover;">
+                    <div class="card-body">
+                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
+                        <h5 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h5>
                     </div>
                 </a>
             </div>
