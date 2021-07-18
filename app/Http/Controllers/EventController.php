@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
@@ -39,6 +40,48 @@ class EventController extends Controller
         ]);
     }
 
+    public function dashboard()
+    {
+
+        //month count
+        $months = [1,2,3,4,5,6,7,8,9,10,11,12];    
+        
+        $countData = [];
+        foreach($months as $month){
+            $event = Event::whereMonth('time', $month)->count();
+            array_push($countData, $event);
+        }
+
+        //organizer count
+        $events = Event::select('organizer', DB::raw('count(*) as total'))
+        ->groupBy('organizer')
+        ->get();
+
+        $organizer = [];
+        $organizerCount = [];
+        foreach($events as $event){
+            array_push($organizer, $event->organizer);
+            array_push($organizerCount, $event->total);
+        }
+
+        //category
+        $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran'];
+        $categoryData = [];
+        foreach($categories as $category)
+        {
+            $event = Event::where('category', $category)->count();
+            array_push($categoryData, $event);
+        }
+
+        return view('admin.events.dashboard')->with([
+            'countData' => json_encode($countData),
+            'organizer' => json_encode($organizer),
+            'organizerCount' => json_encode($organizerCount),
+            'categories' => json_encode($categories),
+            'categoryData' => json_encode($categoryData),
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -64,6 +107,7 @@ class EventController extends Controller
             'location' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'category' => 'required',
             'quota' => 'required',
             'image' => 'required',
             'organizer' => 'required'
@@ -74,6 +118,7 @@ class EventController extends Controller
         $event = Event::create([
             'name' => $request->name,
             'time' => Carbon::parse($request->time),
+            'category' => $request->category,
             'location' => $request->location,
             'description' => $request->description,
             'price' => $request->price,
@@ -154,6 +199,7 @@ class EventController extends Controller
             'time' => 'required',
             'location' => 'required',
             'description' => 'required',
+            'category' => 'required',
             'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
@@ -170,6 +216,7 @@ class EventController extends Controller
             'location' => $request->location,
             'description' => $request->description,
             'price' => $request->price,
+            'category' => $request->category,
             'organizer' => $request->organizer,
             'quota' => $request->quota,
             'image' => $path

@@ -14,7 +14,7 @@
         </div>
         <div class="col-1">
             <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">
-                <i class="fa fa-lg fa-edit"></i>
+                <i class="fa fa-lg fa-edit">Edit</i>
             </a>
         </div>
         <div class="col-1">
@@ -22,7 +22,7 @@
                 @csrf
                 @method('delete')
                 <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary">
-                    <i class="fa fa-lg fa-trash"></i>
+                    <i class="fa fa-lg fa-trash">Hapus</i>
                 </button>
             </form>
         </div>

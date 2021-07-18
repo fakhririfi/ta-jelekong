@@ -38,6 +38,7 @@ Route::group(['prefix' => 'events'], function () {
 Route::group(['middleware' => 'auth'], function () {
     //create group prefix for admin
     Route::group(['prefix' => 'admin'], function () {
+        Route::get('/events/dashboard', 'EventController@dashboard')->name('events.dashboard');
         Route::resource('events', EventController::class);
     });
 });

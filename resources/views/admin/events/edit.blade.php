@@ -32,6 +32,17 @@
         </div>
     </div>
     <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Kategori</label>
+        <div class="col-sm-10">
+            <select name="category" class="form-control">
+                <option value="Tari" {{ $event->category == 'Tari' ? 'selected' : '' }}>Tari</option>
+                <option value="Pentas Musik" {{ $event->category == 'Pentas Musik' ? 'selected' : '' }}>Pentas Musik</option> 
+                <option value="Teater" {{ $event->category == 'Teater' ? 'selected' : '' }}>Teater</option>
+                <option value="Pameran" {{ $event->category == 'Pameran' ? 'selected' : '' }}>Pameran</option>
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Lokasi</label>
         <div class="col-sm-10">
             <input name="location" value="{{ $event->location }}" type="text" class="form-control">

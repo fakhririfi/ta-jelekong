@@ -13,7 +13,10 @@
         </div>
         <div class="col-sm-6">
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
-            <h3 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
+            <p><span class="font-weight-bold">- - - - - - - - - - - - -</span></p>
+            <p>
+            <span class="font-weight-bold">Waktu: </span>{{ date('D d-m-Y H:s', strtotime($event->time)) }}
+</p>
             <p>
                 <span class="font-weight-bold">Penyelenggara: </span>
                 {{ $event->organizer }}
@@ -23,7 +26,7 @@
                 Rp. {{ number_format($event->price, 0, ',', '.') }}
             </p>
             <p class="font-weight-bold">Deskripsi</p>
-            <p>{{ $event->description }}</p>
+            <p align="justify">{{ $event->description }}</p>
             <p>
                 <span class="font-weight-bold">Kuota: </span>
                 {{ $event->quota }}
