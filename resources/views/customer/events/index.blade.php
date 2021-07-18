@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body">
                         <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h5 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h5>
+                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
                     </div>
                 </a>
             </div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-body">
                         <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h5 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h5>
+                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
                     </div>
                 </a>
             </div>
