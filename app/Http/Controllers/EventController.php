@@ -29,14 +29,20 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index_customer()
+    public function index_customer(Request $request)
     {
         $current_events = Event::whereBetween('time', [Carbon::now(), Carbon::now()->addWeek(1)])->get();
         $future_events = Event::where('time', '>', Carbon::now()->addWeek(1))->get();
 
+        $filtered_events = [];
+        if($request->query('month') != null){
+            $filtered_events = Event::whereMonth('time', $request->query('month'))->get();
+        }
+
         return view('customer.events.index')->with([
             'current_events' => $current_events,
             'future_events' => $future_events,
+            'filtered_events' => $filtered_events
         ]);
     }
 
