@@ -20,6 +20,8 @@ class Event extends Model
         'price',
         'quota',
         'image',
-        'organizer'
+        'organizer',
+        'category',
+        'contact_person'
     ];
 }
