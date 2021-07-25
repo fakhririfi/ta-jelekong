@@ -14,7 +14,7 @@ class AddCategoryToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('category')->after('time');
+            $table->string('category')->after('time')->nullable();
         });
     }
 

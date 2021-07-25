@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Whoops\Run;
+//use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,19 +42,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('register', [AuthController::class, 'create']);
     //create group prefix for admin
     Route::group(['prefix' => 'admin'], function () {
+        Route::get('/events/dashboard', 'EventController@dashboard')->name('events.dashboard');
         Route::resource('events', EventController::class);
-        Route::resource('events', EventController::class);
+        Route::resource('schedule', ScheduleController::class);
+        
         //calendar
-        Route::post('/schedule/action', [ScheduleController::class, 'action']);
-        Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule');
-        //create group prefix for admin
-        Route::group(['prefix' => 'admin'], function () {
-            Route::resource('events', EventController::class);
-        });
-        //create group prefix for admin
-        Route::group(['prefix' => 'admin'], function () {
-            Route::get('/events/dashboard', 'EventController@dashboard')->name('events.dashboard');
-            Route::resource('events', EventController::class);
-        });
+        Route::post('/events/action',  'EventController@action');
+        // Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule');
     });
 });

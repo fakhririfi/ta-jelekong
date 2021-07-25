@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Auth;
 class EventController extends Controller
 {
     /**
@@ -15,9 +15,16 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::all();
+        // $request->start = $request->time;
+
+        if ($request->ajax()) {
+            $data = Event::select(['time as start','name as title' ,'schedule as editable','events.*'])->get();
+
+            return response()->json($data);
+        }
+        $events = Event::where('schedule',false)->get();
 
         return view('admin.events.index')->with([
             'events' => $events
@@ -98,6 +105,7 @@ class EventController extends Controller
      */
     public function create()
     {
+       
         return view('admin.events.create');
     }
 
@@ -109,6 +117,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(Auth()->)
 
         $this->validate($request, [
             'name' => 'required',
@@ -135,7 +144,8 @@ class EventController extends Controller
             'contact_person' => $request->contact_person,
             'quota' => $request->quota,
             'organizer' => $request->organizer,
-            'image' => $path
+            'image' => $path,
+            'user_id'=>  $request->user()->id
         ]);
 
         if ($event) {
@@ -259,5 +269,19 @@ class EventController extends Controller
         return redirect()->back()->with([
             'success' => "Berhasil Menghapus $event->name"
         ]);
+    }
+    public function action(Request $request)
+    {
+        
+    
+        if ($request->ajax()) {            
+            if ($request->type == 'update') {
+                $event = Event::find($request->id)->update([
+                    'time'        =>    $request->start,
+                    'end'        =>    $request->end,
+                ]);
+                return response()->json($event);
+            }
+        }
     }
 }

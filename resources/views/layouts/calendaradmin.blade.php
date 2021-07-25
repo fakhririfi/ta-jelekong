@@ -79,7 +79,7 @@
             @endif
 
             <li class="nav-item {{ request()->routeIs('schedule') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('schedule') }}">
+                <a class="nav-link" href="{{ route('schedule.index') }}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>{{ __('Calendar') }}</span>
                 </a>
@@ -167,32 +167,7 @@
 
             </div>
             <!-- /.container-fluid -->
-<div id="myModal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="text" class="form-control" id="title" placeholder="Password"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-        </div>
+            
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -256,19 +231,18 @@ if(Auth::check())
         });
 
         var calendar = $('#calendar').fullCalendar({
-            editable:true,
             header:{
                 left:'prev,next today',
                 center:'title',
                 right:'month,agendaWeek,agendaDay,listWeek'
             },
-            events: SITEURL + "/schedule",
+            events: SITEURL + "/events",
             selectable:true,
             selectHelper: true,
             allDaySlot:false,
             select:function(start, end, allDay)
             {
-                var title = prompt('Event Title:');
+                /*var title = prompt('Event Title:');
                 if(title)
                 {
                     var start = $.fullCalendar.formatDate(start, 'YYYY-MM-DD HH:mm:ss');
@@ -284,24 +258,22 @@ if(Auth::check())
                         },
                         success:function(data)
                         {
-                            console.log(data)
                             calendar.fullCalendar('refetchEvents');
                             alert("Event Created Successfully");
                         }
                     })
                 }
+                */
             },
-            /*eventResize: function(event, delta)
+            eventResize: function(event, delta)
             {
-                var start = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm:ss');
-                var end = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm:ss');
-                var title = event.title;
+                var start = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD hh:mm:ss');
+                var end = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD hh:mm:ss');
                 var id = event.id;
                 $.ajax({
-                    url: SITEURL + "/schedule/action",
+                    url: SITEURL + "/events/action",
                     type:"POST",
                     data:{
-                        title: title,
                         start: start,
                         end: end,
                         id: id,
@@ -314,23 +286,19 @@ if(Auth::check())
                     }
                 })
             },
-            */
+            
             eventDrop: function(event, delta)
             {
-                var start = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm:ss');
-                var end = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm:ss');
-                var title = event.title;
+                var start = $.fullCalendar.formatDate(event.start, "YYYY-MM-DD hh:mm:ss");
+                var end = $.fullCalendar.formatDate(event.end,  "YYYY-MM-DD hh:mm:ss");
                 var id = event.id;
-                console.log(event.allDay)
                 $.ajax({
-                    url: SITEURL + "/schedule/action",
+                    url: SITEURL + "/events/action",
                     type:"POST",
                     data:{
-                        title: title,
                         start: start,
                         end: end,
-                        id: id,
-                        allDay:event.allDay ? 1 : 0,
+                        id: id,                     
                         type: 'update'
                     },
                     success:function(response)
@@ -345,7 +313,22 @@ if(Auth::check())
             {
                 
                 $('#modalTitle').html(event.title)
+                $('#modalTime').val(event.time)
+                $('#modalCategory').val(event.category)
+                $('#modalContact_person').val(event.contact_person)
+                $('#modalLocation').val(event.location)
+                $('#modalDescription').val(event.description)
+                $('#modalOrganizer').val(event.organizer)
+                $('#modalPrice').val(event.price)
+                $('#modalQuota').val(event.Kuota)
+                if(!event.schedule){
+                    $('#modalAction').hide()
+                }else{
+                     $('#formDelete').attr('action', `${SITEURL}/schedule/${event.id}`);
+                    $('#modalAction').show()
+                }
                 $('#myModal').modal('show')
+        
                 /*if(confirm("Are you sure you want to remove it?"))
                 {
                     var id = event.id;

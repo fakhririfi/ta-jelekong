@@ -8,7 +8,63 @@
     <!-- Main Content goes here -->
 
     <div id='calendar'></div>
-
+    <div id="myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="time">Waktu</label>
+                        <input type="text" class="form-control datepicker" id="modalTime" disabled placeholder="Waktu"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Kategori</label>
+                        <input type="text" class="form-control" id="modalCategory" disabled placeholder="Kategori"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_person">Contact Person</label>
+                        <input type="text" class="form-control" id="modalContact_person" disabled placeholder="Contact Person"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Lokasi</label>
+                        <input type="text" class="form-control" id="modalLocation" disabled placeholder="Lokasi"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Deskripsi</label>
+                        <textarea class="form-control" id="modalDescription" disabled placeholder="Deskripsi"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="organizer">Penyelenggara</label>
+                        <input type="text" class="form-control" id="modalOrganizer" disabled placeholder="Penyelenggara"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Harga Tiket</label>
+                        <input type="text" class="form-control" id="modalPrice" disabled placeholder="Harga Tiket"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="quota">Kuota</label>
+                        <input type="text" class="form-control" id="modalQuota" disabled placeholder="Kuota"/>
+                    </div>
+                    </div>
+                    <div id="modalAction" class="modal-footer">
+                     <form action="#" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary">
+                    Delete
+                </button>
+            </form>                       
+                        <button type="button" class="btn btn-secondary">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- End of Main Content -->
 @endsection
 
