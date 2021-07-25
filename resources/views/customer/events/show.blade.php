@@ -11,20 +11,37 @@
         <div class="col-sm-6 overflow-hidden" style="height: 400px;">
             <img src="{{ Storage::url($event->image) }}" class="w-100" style="object-fit: cover;">
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-6" style="text-align: justify;">
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
-            <h3 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
-            <p>
-                <span class="font-weight-bold">Harga Tiket: </span>
-                Rp. {{ number_format($event->price, 0, ',', '.') }}
-            </p>
-            <p class="font-weight-bold">Deskripsi</p>
-            <p>{{ $event->description }}</p>
-            <p>
-                <span class="font-weight-bold">Kuota: </span>
-                {{ $event->quota }}
-            </p>
-            <a href="#" class="btn btn-primary w-50 font-weight-bold p-3">
+            <h4 class="font-weight-bold">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h4>
+            <table class="table table-borderless">
+                <tr>
+                    <td>Penyelenggara</td>
+                    <td>:</td>
+                    <td>{{ $event->organizer }}</td>
+                </tr>
+                <tr>
+                    <td>Contact Person</td>
+                    <td>:</td>
+                    <td>{{ $event->contact_person }}</td>
+                </tr>
+                <tr>
+                    <td>Harga Tiket</td>
+                    <td>:</td>
+                    <td>Rp. {{ number_format($event->price, 0, ',', '.') }}</td>
+                </tr>
+                <tr>
+                    <td>Deskripsi</td>
+                    <td>:</td>
+                    <td>{{ $event->description }}</td>
+                </tr>
+                <tr>
+                    <td>Kuota</td>
+                    <td>:</td>
+                    <td>{{ $event->quota }}</td>
+                </tr>
+            </table>
+            <a href="#" class="btn btn-primary w-50 font-weight-bold p-3 {{ $event->quota <= 0 ? 'disabled' : '' }}" {{ $event->quota <= 0 ? 'disabled' : '' }}>
                 Pesan
             </a>
         </div>

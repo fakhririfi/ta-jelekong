@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ScheduleController;
-
 use Whoops\Run;
+//use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +38,15 @@ Route::group(['prefix' => 'events'], function () {
 
 //create middle ware
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('register', [AuthController::class, 'registerView'])->name('register');
+    Route::post('register', [AuthController::class, 'create']);
     //create group prefix for admin
     Route::group(['prefix' => 'admin'], function () {
+        Route::get('/events/dashboard', 'EventController@dashboard')->name('events.dashboard');
         Route::resource('events', EventController::class);
+        //calendar
+        Route::resource('schedule', ScheduleController::class);
+        Route::post('/events/action',  'EventController@action');
+
     });
 });
-
-//calendar
-Route::get('schedule', [ScheduleController::class, 'index']);
-Route::post('shceduleAjax', [ScheduleController::class, 'ajax']);

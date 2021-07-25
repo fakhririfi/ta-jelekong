@@ -51,10 +51,17 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('events.dashboard') }}">Dashboard Event</a>
                     <a class="collapse-item" href="{{ route('events.create') }}">Buat Event</a>
                     <a class="collapse-item" href="{{ route('events.index') }}">List Event</a>
                 </div>
             </div>
+        </li>
+        <li class="nav-item {{ request()->routeIs('schedule.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('schedule.index') }}">
+                <i class="fas fa-fw fa-calendar"></i>
+                <span>{{ __('Calendar') }}</span>
+            </a>
         </li>
         @else
         <li class="nav-item {{ Nav::isRoute('events.*') }}">
@@ -69,6 +76,8 @@
             </div>
         </li>
         @endif
+
+
 
         <!-- <li class="nav-item {{ Nav::isRoute('profile') }}">
             <a class="nav-link" href="{{ route('profile') }}">

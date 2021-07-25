@@ -7,6 +7,49 @@
 <!-- Main Content goes here -->
 
 <div class="container-fluid">
+
+    <div class="row p-3 mb-3">
+        <div class="col-12">
+            <h2 class="font-weight-bold text-primary mb-4">Filter Acara</h2>
+        </div>
+        <div class="col-12 mb-3">
+            <form action="" method="get">
+                <select name="month" class="form-control">
+                    <option value="1" {{ Request::get('month') == 1 ? 'selected' : '' }}>Januari</option>
+                    <option value="2" {{ Request::get('month') == 2 ? 'selected' : '' }}>Februari</option>
+                    <option value="3" {{ Request::get('month') == 3 ? 'selected' : '' }}>Maret</option>
+                    <option value="4" {{ Request::get('month') == 4 ? 'selected' : '' }}>April</option>
+                    <option value="5" {{ Request::get('month') == 5 ? 'selected' : '' }}>Mei</option>
+                    <option value="6" {{ Request::get('month') == 6 ? 'selected' : '' }}>Juni</option>
+                    <option value="7" {{ Request::get('month') == 7 ? 'selected' : '' }}>Juli</option>
+                    <option value="8" {{ Request::get('month') == 8 ? 'selected' : '' }}>Agustus</option>
+                    <option value="9" {{ Request::get('month') == 9 ? 'selected' : '' }}>September</option>
+                    <option value="10" {{ Request::get('month') == 10 ? 'selected' : '' }}>Oktober</option>
+                    <option value="11" {{ Request::get('month') == 11 ? 'selected' : '' }}>November</option>
+                    <option value="12" {{ Request::get('month') == 12 ? 'selected' : '' }}>Desember</option>
+                </select>
+                <button class="btn btn-primary mt-3">Filter</button>
+            </form>
+        </div>
+        <div class="owl-carousel col-12">
+            @foreach($filtered_events as $event)
+
+            <div class="card" style="width: 23rem;">
+                <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
+                    <div class="overflow-hidden" style="height: 200px;">
+                        <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
+                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
+                    </div>
+                </a>
+            </div>
+
+            @endforeach
+        </div>
+    </div>
+
     <div class="row p-3 mb-3">
         <div class="col-12">
             <h2 class="font-weight-bold text-primary mb-4">Acara Yang Tersedia</h2>
@@ -14,14 +57,14 @@
         <div class="owl-carousel col-12">
             @foreach($current_events as $event)
 
-            <div class="relative">
+            <div class="card" style="width: 23rem;">
                 <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
-                    <div class="text-white ml-3" style="position:absolute; bottom: 0; left: 0;">
-                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h3 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
+                    <div class="overflow-hidden" style="height: 200px;">
+                        <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
                     </div>
-                    <div class="overflow-hidden" style="height: 350px; width: 350px;">
-                        <img src="{{ Storage::url($event->image) }}" class="h-100" style="object-fit: cover;">
+                    <div class="card-body">
+                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
+                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
                     </div>
                 </a>
             </div>
@@ -37,14 +80,14 @@
         <div class="owl-carousel col-12">
             @foreach($future_events as $event)
 
-            <div class="relative">
+            <div class="card" style="width: 23rem;">
                 <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
-                    <div class="text-white ml-3" style="position:absolute; bottom: 0; left: 0;">
-                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h3 class="font-weight-bold text-primary">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
+                    <div class="overflow-hidden" style="height: 200px;">
+                        <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
                     </div>
-                    <div class="overflow-hidden" style="height: 350px; width: 350px;">
-                        <img src="{{ Storage::url($event->image) }}" class="h-100" style="object-fit: cover;">
+                    <div class="card-body">
+                        <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
+                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
                     </div>
                 </a>
             </div>
