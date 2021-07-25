@@ -57,6 +57,12 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item {{ request()->routeIs('schedule.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('schedule.index') }}">
+                <i class="fas fa-fw fa-calendar"></i>
+                <span>{{ __('Calendar') }}</span>
+            </a>
+        </li>
         @else
         <li class="nav-item {{ Nav::isRoute('events.*') }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -70,6 +76,8 @@
             </div>
         </li>
         @endif
+
+
 
         <!-- <li class="nav-item {{ Nav::isRoute('profile') }}">
             <a class="nav-link" href="{{ route('profile') }}">

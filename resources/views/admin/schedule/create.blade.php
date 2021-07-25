@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.calendaradmin')
 
 @section('main-content')
 <!-- Page Heading -->
@@ -27,26 +27,15 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Waktu Mulai</label>
         <div class="col-sm-10">
-            <input name="time" type="text" class="form-control datepicker">
+            <input name="time" value="{{ $start }}" type="text" class="form-control datepicker">
         </div>
     </div>
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Waktu Berakhir</label>
         <div class="col-sm-10">
-            <input name="end" type="text" class="form-control datepicker">
+            <input name="end" value="{{ $end }}" type="text" class="form-control datepicker">
         </div>
     </div>
-    {{-- <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Kategori</label>
-        <div class="col-sm-10">
-            <select name="category" class="form-control">
-                <option value="Tari">Tari</option>
-                <option value="Pentas Musik">Pentas Musik</option>
-                <option value="Teater">Teater</option>
-                <option value="Pameran">Pameran</option>
-            </select>
-        </div>
-    </div> --}}
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Contact Person</label>
         <div class="col-sm-10">
@@ -71,24 +60,6 @@
             <input name="organizer" type="text" class="form-control">
         </div>
     </div>
-    {{-- <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Harga Tiket</label>
-        <div class="col-sm-10">
-            <input name="price" type="number" class="form-control">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Kuota</label>
-        <div class="col-sm-10">
-            <input name="quota" type="number" class="form-control">
-        </div>
-    </div>
-    <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Upload</label>
-        <div class="col-sm-10">
-            <input name="image" type="file" class="form-control-plaintext">
-        </div>
-    </div> --}}
     <div class="mb-3 row">
         <button class="btn btn-primary mx-auto w-25">Simpan</button>
     </div>

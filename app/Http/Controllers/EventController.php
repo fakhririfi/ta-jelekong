@@ -105,7 +105,7 @@ class EventController extends Controller
      */
     public function create()
     {
-       
+
         return view('admin.events.create');
     }
 
@@ -117,8 +117,6 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(Auth()->)
-
         $this->validate($request, [
             'name' => 'required',
             'time' => 'required',
@@ -272,9 +270,9 @@ class EventController extends Controller
     }
     public function action(Request $request)
     {
-        
-    
-        if ($request->ajax()) {            
+
+
+        if ($request->ajax()) {
             if ($request->type == 'update') {
                 $event = Event::find($request->id)->update([
                     'time'        =>    $request->start,

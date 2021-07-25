@@ -44,10 +44,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin'], function () {
         Route::get('/events/dashboard', 'EventController@dashboard')->name('events.dashboard');
         Route::resource('events', EventController::class);
-        Route::resource('schedule', ScheduleController::class);
-        
         //calendar
+        Route::resource('schedule', ScheduleController::class);
         Route::post('/events/action',  'EventController@action');
-        // Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule');
+
     });
 });

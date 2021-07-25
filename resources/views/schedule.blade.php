@@ -22,7 +22,7 @@
                         <label for="time">Waktu</label>
                         <input type="text" class="form-control datepicker" id="modalTime" disabled placeholder="Waktu"/>
                     </div>
-                    <div class="form-group">
+                    <div id="groupCategory" class="form-group">
                         <label for="category">Kategori</label>
                         <input type="text" class="form-control" id="modalCategory" disabled placeholder="Kategori"/>
                     </div>
@@ -42,24 +42,27 @@
                         <label for="organizer">Penyelenggara</label>
                         <input type="text" class="form-control" id="modalOrganizer" disabled placeholder="Penyelenggara"/>
                     </div>
-                    <div class="form-group">
+                    <div id="groupPrice" class="form-group">
                         <label for="price">Harga Tiket</label>
                         <input type="text" class="form-control" id="modalPrice" disabled placeholder="Harga Tiket"/>
                     </div>
-                    <div class="form-group">
+                    <div id="groupKuota" class="form-group">
                         <label for="quota">Kuota</label>
                         <input type="text" class="form-control" id="modalQuota" disabled placeholder="Kuota"/>
                     </div>
                     </div>
                     <div id="modalAction" class="modal-footer">
-                     <form action="#" method="post">
+                    <form id="formDelete" action="#" method="post">
                 @csrf
                 @method('delete')
-                <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary">
+                <button type="submit" onclick="return confirm('Apakah Anda Yakin?')" class="btn btn-primary">
                     Delete
                 </button>
-            </form>                       
-                        <button type="button" class="btn btn-secondary">Update</button>
+            </form>
+            <a  id="btnUpdate" href="#" class="btn btn-secondary">
+                Edit
+            </a>
+
                     </div>
                 </div>
             </div>

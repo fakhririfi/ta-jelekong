@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Event;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 class ScheduleController extends Controller
 {
 
@@ -15,11 +17,11 @@ class ScheduleController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->ajax()) {
-            $data = Schedule::all();
+        // if ($request->ajax()) {
+        //     $data = Schedule::all();
 
-            return response()->json($data);
-        }
+        //     return response()->json($data);
+        // }
 
         return view('schedule');
     }
@@ -29,9 +31,11 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.schedule.create');
+        $start =  $request->query('start');
+        $end =  $request->query('end');
+        return view('admin.schedule.create', with(['start' => $start, 'end' => $end]));
     }
 
     /**
@@ -66,7 +70,7 @@ class ScheduleController extends Controller
         ]);
 
         if ($event) {
-            return redirect()->back()->with([
+            return redirect()->route('schedule.index')->with([
                 'success' => 'Berhasil Menyimpan'
             ]);
         } else {
@@ -96,7 +100,7 @@ class ScheduleController extends Controller
     public function edit(Event $event)
     {
 
-        if(!$event){
+        if (!$event) {
             return redirect()->back()->withErrors([
                 'events' => 'data tidak ditemukan'
             ]);
@@ -139,7 +143,7 @@ class ScheduleController extends Controller
         ]);
 
         if ($event) {
-            return redirect()->back()->with([
+            return redirect()->route('schedule.index')->with([
                 'success' => 'Berhasil Menyimpan'
             ]);
         } else {

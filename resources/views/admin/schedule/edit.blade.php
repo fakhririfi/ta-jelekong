@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.calendaradmin')
 
 @section('main-content')
 <!-- Page Heading -->

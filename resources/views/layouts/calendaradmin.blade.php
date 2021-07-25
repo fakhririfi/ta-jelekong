@@ -59,10 +59,17 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('events.create') }}">Buat Event</a>
-                        <a class="collapse-item" href="{{ route('events.index') }}">List Event</a>
+                        <a class="collapse-item" href="{{ route('events.dashboard') }}">Dashboard Event</a>
+                    <a class="collapse-item" href="{{ route('events.create') }}">Buat Event</a>
+                    <a class="collapse-item" href="{{ route('events.index') }}">List Event</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item {{ request()->routeIs('schedule.index') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('schedule.index') }}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>{{ __('Calendar') }}</span>
+                </a>
             </li>
             @else
             <li class="nav-item {{ Nav::isRoute('events.*') }}">
@@ -78,12 +85,6 @@
             </li>
             @endif
 
-            <li class="nav-item {{ request()->routeIs('schedule') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('schedule.index') }}">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    <span>{{ __('Calendar') }}</span>
-                </a>
-            </li>
 
             <!-- <li class="nav-item {{ Nav::isRoute('profile') }}">
                 <a class="nav-link" href="{{ route('profile') }}">
@@ -167,7 +168,7 @@
 
             </div>
             <!-- /.container-fluid -->
-            
+
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -190,7 +191,6 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-if(Auth::check())
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -242,28 +242,12 @@ if(Auth::check())
             allDaySlot:false,
             select:function(start, end, allDay)
             {
-                /*var title = prompt('Event Title:');
-                if(title)
-                {
-                    var start = $.fullCalendar.formatDate(start, 'YYYY-MM-DD HH:mm:ss');
-                    var end = $.fullCalendar.formatDate(end, 'YYYY-MM-DD HH:mm:ss');
-                    $.ajax({
-                        url: SITEURL + "/schedule/action",
-                        type:"POST",
-                        data:{
-                            title: title,
-                            start: start,
-                            end: end,
-                            type: 'add'
-                        },
-                        success:function(data)
-                        {
-                            calendar.fullCalendar('refetchEvents');
-                            alert("Event Created Successfully");
-                        }
-                    })
+                const tambah  = confirm('Apakah Anda Ingin Menambah jadwal?')
+                start = moment(start).format('YYYY/MM/DD HH:mm');
+                end =  moment(end).format('YYYY/MM/DD HH:mm');
+                if(tambah){
+                    $(location).attr("href", `${SITEURL}/schedule/create?start=${start}&end=${end}`);
                 }
-                */
             },
             eventResize: function(event, delta)
             {
@@ -286,7 +270,7 @@ if(Auth::check())
                     }
                 })
             },
-            
+
             eventDrop: function(event, delta)
             {
                 var start = $.fullCalendar.formatDate(event.start, "YYYY-MM-DD hh:mm:ss");
@@ -298,7 +282,7 @@ if(Auth::check())
                     data:{
                         start: start,
                         end: end,
-                        id: id,                     
+                        id: id,
                         type: 'update'
                     },
                     success:function(response)
@@ -311,7 +295,7 @@ if(Auth::check())
 
             eventClick:function(event)
             {
-                
+
                 $('#modalTitle').html(event.title)
                 $('#modalTime').val(event.time)
                 $('#modalCategory').val(event.category)
@@ -320,141 +304,30 @@ if(Auth::check())
                 $('#modalDescription').val(event.description)
                 $('#modalOrganizer').val(event.organizer)
                 $('#modalPrice').val(event.price)
-                $('#modalQuota').val(event.Kuota)
+                $('#modalQuota').val(event.quota)
+                const listAttr = ['Kuota', 'Price', 'Category']
                 if(!event.schedule){
                     $('#modalAction').hide()
+                    listAttr.forEach((list)=>{
+
+                        $(`#group${list}`).show()
+                    })
                 }else{
-                     $('#formDelete').attr('action', `${SITEURL}/schedule/${event.id}`);
+                    listAttr.forEach((list)=>{
+
+                        $(`#group${list}`).hide()
+                    })
+                    $('#formDelete').attr('action', `${SITEURL}/schedule/${event.id}`);
+                    $('#btnUpdate').attr('href', `${SITEURL}/schedule/${event.id}/edit`);
                     $('#modalAction').show()
                 }
                 $('#myModal').modal('show')
-        
-                /*if(confirm("Are you sure you want to remove it?"))
-                {
-                    var id = event.id;
-                    $.ajax({
-                        url: SITEURL + "/schedule/action",
-                        type:"POST",
-                        data:{
-                            id:id,
-                            type:"delete"
-                        },
-                        success:function(response)
-                        {
-                            calendar.fullCalendar('refetchEvents');
-                            alert("Event Deleted Successfully");
-                        }
-                    })
-                }*/
             }
         });
 
     });
 
 </script>
-
-{{-- <script>
-    $(document).ready(function () {
-
-        var SITEURL = "{{ url('/admin') }}";
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        var calendar = $('#calendar').fullCalendar({
-            editable: true,
-            events: SITEURL + "/schedule",
-            displayEventTime: false,
-            editable: true,
-            eventRender: function (event, element, view) {
-                if (event.allDay === 'true') {
-                    event.allDay = true;
-                } else {
-                    event.allDay = false;
-                }
-            },
-            selectable: true,
-            selectHelper: true,
-            select: function (start, end, allDay) {
-                var title = prompt('Event Title:');
-                if (title) {
-                    var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-                    var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
-                    $.ajax({
-                        url: SITEURL + "/scheduleAjax",
-                        data: {
-                            title: title,
-                            start: start,
-                            end: end,
-                            type: 'add'
-                        },
-                        type: "POST",
-                        success: function (data) {
-                            displayMessage("Event Created Successfully");
-
-                            calendar.fullCalendar('renderEvent',
-                                {
-                                    id: data.id,
-                                    title: title,
-                                    start: start,
-                                    end: end,
-                                    allDay: allDay
-                                },true);
-
-                            calendar.fullCalendar('unselect');
-                        }
-                    });
-                }
-            },
-            eventDrop: function (event, delta) {
-                var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
-                var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
-
-                $.ajax({
-                    url: SITEURL + '/scheduleAjax',
-                    data: {
-                        title: event.title,
-                        start: start,
-                        end: end,
-                        id: event.id,
-                        type: 'update'
-                    },
-                    type: "POST",
-                    success: function (response) {
-                        displayMessage("Event Updated Successfully");
-                    }
-                });
-            },
-            eventClick: function (event) {
-                var deleteMsg = confirm("Do you really want to delete?");
-                if (deleteMsg) {
-                    $.ajax({
-                        type: "POST",
-                        url: SITEURL + '/scheduleAjax',
-                        data: {
-                            id: event.id,
-                            type: 'delete'
-                        },
-                        success: function (response) {
-                            calendar.fullCalendar('removeEvents', event.id);
-                            displayMessage("Event Deleted Successfully");
-                        }
-                    });
-                }
-            }
-
-        });
-
-    });
-
-    function displayMessage(message) {
-        toastr.success(message, 'Event');
-    }
-
-</script> --}}
 @stack('js')
 </body>
 </html>
