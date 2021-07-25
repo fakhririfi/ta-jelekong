@@ -17,11 +17,13 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('name');
             $table->datetime('time');
+            $table->datetime('end')->nullable();
             $table->string('location');
             $table->text('description');
             $table->bigInteger('price');
             $table->integer('quota');
             $table->string('image');
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

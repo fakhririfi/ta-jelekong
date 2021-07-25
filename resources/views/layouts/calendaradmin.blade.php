@@ -167,7 +167,31 @@
 
             </div>
             <!-- /.container-fluid -->
-
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="text" class="form-control" id="title" placeholder="Password"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
         <!-- End of Main Content -->
 
@@ -221,6 +245,132 @@ if(Auth::check())
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
 <script>
+
+    $(document).ready(function () {
+
+        var SITEURL = "{{ url('/admin') }}";
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var calendar = $('#calendar').fullCalendar({
+            editable:true,
+            header:{
+                left:'prev,next today',
+                center:'title',
+                right:'month,agendaWeek,agendaDay,listWeek'
+            },
+            events: SITEURL + "/schedule",
+            selectable:true,
+            selectHelper: true,
+            allDaySlot:false,
+            select:function(start, end, allDay)
+            {
+                var title = prompt('Event Title:');
+                if(title)
+                {
+                    var start = $.fullCalendar.formatDate(start, 'YYYY-MM-DD HH:mm:ss');
+                    var end = $.fullCalendar.formatDate(end, 'YYYY-MM-DD HH:mm:ss');
+                    $.ajax({
+                        url: SITEURL + "/schedule/action",
+                        type:"POST",
+                        data:{
+                            title: title,
+                            start: start,
+                            end: end,
+                            type: 'add'
+                        },
+                        success:function(data)
+                        {
+                            console.log(data)
+                            calendar.fullCalendar('refetchEvents');
+                            alert("Event Created Successfully");
+                        }
+                    })
+                }
+            },
+            /*eventResize: function(event, delta)
+            {
+                var start = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm:ss');
+                var end = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm:ss');
+                var title = event.title;
+                var id = event.id;
+                $.ajax({
+                    url: SITEURL + "/schedule/action",
+                    type:"POST",
+                    data:{
+                        title: title,
+                        start: start,
+                        end: end,
+                        id: id,
+                        type: 'update'
+                    },
+                    success:function(response)
+                    {
+                        calendar.fullCalendar('refetchEvents');
+                        alert("Event Updated Successfully");
+                    }
+                })
+            },
+            */
+            eventDrop: function(event, delta)
+            {
+                var start = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm:ss');
+                var end = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm:ss');
+                var title = event.title;
+                var id = event.id;
+                console.log(event.allDay)
+                $.ajax({
+                    url: SITEURL + "/schedule/action",
+                    type:"POST",
+                    data:{
+                        title: title,
+                        start: start,
+                        end: end,
+                        id: id,
+                        allDay:event.allDay ? 1 : 0,
+                        type: 'update'
+                    },
+                    success:function(response)
+                    {
+                        calendar.fullCalendar('refetchEvents');
+                        alert("Event Updated Successfully");
+                    }
+                })
+            },
+
+            eventClick:function(event)
+            {
+                
+                $('#modalTitle').html(event.title)
+                $('#myModal').modal('show')
+                /*if(confirm("Are you sure you want to remove it?"))
+                {
+                    var id = event.id;
+                    $.ajax({
+                        url: SITEURL + "/schedule/action",
+                        type:"POST",
+                        data:{
+                            id:id,
+                            type:"delete"
+                        },
+                        success:function(response)
+                        {
+                            calendar.fullCalendar('refetchEvents');
+                            alert("Event Deleted Successfully");
+                        }
+                    })
+                }*/
+            }
+        });
+
+    });
+
+</script>
+
+{{-- <script>
     $(document).ready(function () {
 
         var SITEURL = "{{ url('/admin') }}";
@@ -321,7 +471,7 @@ if(Auth::check())
         toastr.success(message, 'Event');
     }
 
-</script>
+</script> --}}
 @stack('js')
 </body>
 </html>

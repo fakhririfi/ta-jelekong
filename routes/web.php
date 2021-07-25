@@ -39,15 +39,18 @@ Route::group(['prefix' => 'events'], function () {
 
 //create middle ware
 Route::group(['middleware' => 'auth'], function () {
-
-    // register
     Route::get('register', [AuthController::class, 'registerView'])->name('register');
     Route::post('register', [AuthController::class, 'create']);
     //create group prefix for admin
     Route::group(['prefix' => 'admin'], function () {
         Route::resource('events', EventController::class);
+        Route::resource('events', EventController::class);
         //calendar
-        Route::post('scheduleAjax', [ScheduleController::class, 'ajax']);
-        Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule');
+        Route::post('/schedule/action', [ScheduleController::class, 'action']);
+        Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule');
+        //create group prefix for admin
+        Route::group(['prefix' => 'admin'], function () {
+            Route::resource('events', EventController::class);
+        });
     });
 });
