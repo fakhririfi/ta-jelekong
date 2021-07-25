@@ -3,7 +3,8 @@
 @section('main-content')
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('Dashboard') }}</h1>
+<h1 class="mb-2 text-gray-800">{{ __('Dashboard') }}</h1>
+<h3 class="mb-4 text-gray-600">Dashboard Event untuk tahun {{ date('Y') }}</h3>
 
 @if (session('success'))
 <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
