@@ -60,7 +60,7 @@ class ScheduleController extends Controller
         $event = Event::create([
             'name'              => $request->name,
             'time'              => Carbon::parse($request->time),
-            'end'               => Carbon::parse($request->time),
+            'end'               => Carbon::parse($request->end),
             'location'          => $request->location,
             'description'       => $request->description,
             'contact_person'    => $request->contact_person,
@@ -105,7 +105,8 @@ class ScheduleController extends Controller
                 'events' => 'data tidak ditemukan'
             ]);
         }
-
+        $event->time = Carbon::parse($event->time)->format('Y/m/d H:m');
+        $event->end = Carbon::parse($event->end)->format('Y/m/d H:m');
         return view('admin.schedule.edit')->with([
             'event' => $event
         ]);
@@ -135,7 +136,7 @@ class ScheduleController extends Controller
         $event->update([
             'name'              => $request->name,
             'time'              => Carbon::parse($request->time),
-            'end'               => Carbon::parse($request->time),
+            'end'               => Carbon::parse($request->end),
             'location'          => $request->location,
             'description'       => $request->description,
             'contact_person'    => $request->contact_person,

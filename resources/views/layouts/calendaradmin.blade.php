@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item {{ request()->routeIs('schedule.index') ? 'active' : '' }}">
+            <li class="nav-item {{ request()->routeIs('schedule.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('schedule.index') }}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>{{ __('Calendar') }}</span>
@@ -238,7 +238,6 @@
             },
             events: SITEURL + "/events",
             selectable:true,
-            selectHelper: true,
             allDaySlot:false,
             select:function(start, end, allDay)
             {
@@ -247,12 +246,14 @@
                 end =  moment(end).format('YYYY/MM/DD HH:mm');
                 if(tambah){
                     $(location).attr("href", `${SITEURL}/schedule/create?start=${start}&end=${end}`);
+                }else{
+                    calendar.fullCalendar('refetchEvents');
                 }
             },
             eventResize: function(event, delta)
             {
-                var start = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD hh:mm:ss');
-                var end = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD hh:mm:ss');
+                var start = $.fullCalendar.formatDate(event.start, 'YYYY-MM-DD HH:mm');
+                var end = $.fullCalendar.formatDate(event.end, 'YYYY-MM-DD HH:mm');
                 var id = event.id;
                 $.ajax({
                     url: SITEURL + "/events/action",
@@ -273,8 +274,8 @@
 
             eventDrop: function(event, delta)
             {
-                var start = $.fullCalendar.formatDate(event.start, "YYYY-MM-DD hh:mm:ss");
-                var end = $.fullCalendar.formatDate(event.end,  "YYYY-MM-DD hh:mm:ss");
+                var start = $.fullCalendar.formatDate(event.start, "YYYY-MM-DD HH:mm");
+                var end = $.fullCalendar.formatDate(event.end,  "YYYY-MM-DD HH:mm");
                 var id = event.id;
                 $.ajax({
                     url: SITEURL + "/events/action",
@@ -295,24 +296,27 @@
 
             eventClick:function(event)
             {
-
                 $('#modalTitle').html(event.title)
-                $('#modalTime').val(event.time)
-                $('#modalCategory').val(event.category)
+                $('#modalTime').val(moment(event.start).format('YYYY/MM/DD HH:mm'))
                 $('#modalContact_person').val(event.contact_person)
                 $('#modalLocation').val(event.location)
                 $('#modalDescription').val(event.description)
                 $('#modalOrganizer').val(event.organizer)
-                $('#modalPrice').val(event.price)
-                $('#modalQuota').val(event.quota)
                 const listAttr = ['Kuota', 'Price', 'Category']
                 if(!event.schedule){
+                    // punya event
+                    $('#modalCategory').val(event.category)
+                    $('#modalPrice').val(event.price)
+                    $('#modalQuota').val(event.quota)
+                    $('#groupEnd').hide()
                     $('#modalAction').hide()
                     listAttr.forEach((list)=>{
-
                         $(`#group${list}`).show()
                     })
                 }else{
+                    // punya schedule
+                    $('#groupEnd').show()
+                    $('#modalEnd').val(moment(event.end).format('YYYY/MM/DD HH:mm'))
                     listAttr.forEach((list)=>{
 
                         $(`#group${list}`).hide()
