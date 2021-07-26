@@ -34,10 +34,17 @@ Route::group(['prefix' => 'events'], function () {
     Route::get('/{id}', 'EventController@show_customer')->name('customer.events.show');
 });
 
+//create group prefix for articles customer
+Route::group(['prefix' => 'articles'], function () {
+    Route::get('/', 'ArticleController@index_customer')->name('customer.articles.index');
+    Route::get('/{id}', 'ArticleController@show_customer')->name('customer.articles.show');
+});
+
 //create middle ware
 Route::group(['middleware' => 'auth'], function () {
     //create group prefix for admin
     Route::group(['prefix' => 'admin'], function () {
         Route::resource('events', EventController::class);
+        Route::resource('articles', ArticleController::class);
     });
 });
