@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+
 class EventController extends Controller
 {
     /**
@@ -20,11 +21,11 @@ class EventController extends Controller
         // $request->start = $request->time;
 
         if ($request->ajax()) {
-            $data = Event::select(['time as start','name as title' ,'schedule as editable','events.*'])->get();
+            $data = Event::select(['time as start', 'name as title', 'schedule as editable', 'events.*'])->get();
 
             return response()->json($data);
         }
-        $events = Event::where('schedule',false)->get();
+        $events = Event::where('schedule', false)->get();
 
         return view('admin.events.index')->with([
             'events' => $events
@@ -42,7 +43,7 @@ class EventController extends Controller
         $future_events = Event::where('time', '>', Carbon::now()->addWeek(1))->get();
 
         $filtered_events = [];
-        if($request->query('month') != null){
+        if ($request->query('month') != null) {
             $filtered_events = Event::whereMonth('time', $request->query('month'))->get();
         }
 
@@ -57,25 +58,25 @@ class EventController extends Controller
     {
 
         //month count
-        $months = [1,2,3,4,5,6,7,8,9,10,11,12];
+        $months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
         $countData = [];
         $year = Carbon::now()->year;
-        foreach($months as $month){
+        foreach ($months as $month) {
             $event = Event::whereMonth('time', $month)
-            ->whereYear('time', $year)
-            ->count();
+                ->whereYear('time', $year)
+                ->count();
             array_push($countData, $event);
         }
 
         //organizer count
         $events = Event::select('organizer', DB::raw('count(*) as total'))
-        ->groupBy('organizer')
-        ->get();
+            ->groupBy('organizer')
+            ->get();
 
         $organizer = [];
         $organizerCount = [];
-        foreach($events as $event){
+        foreach ($events as $event) {
             array_push($organizer, $event->organizer);
             array_push($organizerCount, $event->total);
         }
@@ -83,8 +84,7 @@ class EventController extends Controller
         //category
         $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran'];
         $categoryData = [];
-        foreach($categories as $category)
-        {
+        foreach ($categories as $category) {
             $event = Event::where('category', $category)->count();
             array_push($categoryData, $event);
         }
@@ -143,7 +143,7 @@ class EventController extends Controller
             'quota' => $request->quota,
             'organizer' => $request->organizer,
             'image' => $path,
-            'user_id'=>  $request->user()->id
+            'user_id' =>  $request->user()->id
         ]);
 
         if ($event) {
@@ -192,12 +192,13 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        if(!$event){
+        if (!$event) {
             return redirect()->back()->withErrors([
                 'events' => 'data tidak ditemukan'
             ]);
         }
-
+        $event->time = Carbon::parse($event->time)->format('Y/m/d H:m');
+        $event->end = Carbon::parse($event->end)->format('Y/m/d H:m');
         return view('admin.events.edit')->with([
             'event' => $event
         ]);
@@ -226,7 +227,7 @@ class EventController extends Controller
         ]);
 
         $path = $event->image;
-        if(isset($request->image)){
+        if (isset($request->image)) {
             $path = $request->file('image')->store('events', 'public');
         }
 

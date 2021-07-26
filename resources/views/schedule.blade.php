@@ -19,8 +19,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="time">Waktu</label>
-                        <input type="text" class="form-control datepicker" id="modalTime" disabled placeholder="Waktu"/>
+                        <label for="time">Waktu Mulai</label>
+                        <input type="text" class="form-control datepicker" id="modalTime" disabled placeholder="Waktu Mulai"/>
+                    </div>
+                    <div id="groupEnd" class="form-group">
+                        <label for="end">Waktu selesai</label>
+                        <input type="text" class="form-control datepicker" id="modalEnd" disabled placeholder="Waktu Selesai"/>
                     </div>
                     <div id="groupCategory" class="form-group">
                         <label for="category">Kategori</label>
