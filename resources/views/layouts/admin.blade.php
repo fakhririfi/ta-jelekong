@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Laravel SB Admin 2">
     <meta name="author" content="Alejandro RH">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Fonts -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -21,7 +18,6 @@
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
     @stack('css')
 </head>
-
 <body id="page-top">
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -74,7 +70,19 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item {{ Nav::isRoute('articles.*') }}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticle" aria-expanded="true" aria-controls="collapseArticle">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Articles</span>
+            </a>
+            <div id="collapseArticle" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('customer.articles.index') }}">List Article</a>
+                </div>
+            </div>
+        </li>
         @endif
+
         <!-- <li class="nav-item {{ Nav::isRoute('profile') }}">
             <a class="nav-link" href="{{ route('profile') }}">
                 <i class="fas fa-fw fa-user"></i>
