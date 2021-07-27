@@ -66,6 +66,7 @@ class EventController extends Controller
             'price' => 'required',
             'quota' => 'required',
             'image' => 'required',
+            'organizer' => 'required'
         ]);
 
         $path = $request->file('image')->store('events', 'public');
@@ -77,6 +78,7 @@ class EventController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'quota' => $request->quota,
+            'organizer' => $request->organizer,
             'image' => $path
         ]);
 

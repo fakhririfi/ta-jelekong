@@ -19,7 +19,7 @@
         </div>
         @if($event != null)
         <div class="col-sm-12 p-3 bg-white">
-            <p>Detail event nya dapat di lihat di : <a href="{{ route('customer.articles.show', $event->id) }}">{{ route('customer.articles.show', $event->id) }}</a></p>
+            <p>Detail event nya dapat di lihat di : <a href="{{ route('customer.events.show', $event->id) }}">{{ route('customer.events.show', $event->id) }}</a></p>
         </div>
         @endif
         <div class="col-sm-12 p-3 bg-white">

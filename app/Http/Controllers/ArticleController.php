@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -25,7 +26,8 @@ class ArticleController extends Controller
 
     public function index_customer()
     {
-        $articles = Article::all();
+        $articles = Article::whereDate('post_date', '<=', Carbon::now())
+        ->get();
 
         return view('customer.articles.index')->with([
             'articles' => $articles
@@ -59,6 +61,7 @@ class ArticleController extends Controller
             'title' => 'required',
             'content' => 'required',
             'image' => 'required',
+            'time' => 'required'
         ]);
 
         $path = $request->file('image')->store('articles', 'public');
@@ -72,7 +75,9 @@ class ArticleController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'image' => $path,
-            'event_id' => $event_id
+            'event_id' => $event_id,
+            'post_date' => Carbon::parse($request->time)
+            
         ]);
 
         if ($article) {
@@ -100,6 +105,12 @@ class ArticleController extends Controller
     public function show_customer($id)
     {
         $article = Article::find($id);
+
+        if(!Carbon::parse($article->post_date)->isPast()){
+            return redirect(route('customer.articles.index'))->withErrors([
+                'error' => 'Tidak dapat membuka artikel'
+            ]);
+        }
 
         $event = null;
         if($article->event_id != null){
@@ -130,6 +141,7 @@ class ArticleController extends Controller
 
         return view('admin.articles.edit')->with([
             'article' => $article,
+            'article' => $article,
             'events' => $events
         ]);
     }
@@ -147,6 +159,7 @@ class ArticleController extends Controller
             'title' => 'required',
             'content' => 'required',
             'image' => 'required',
+             'time' => 'required'
         ]);
 
         $path = $article->image;
@@ -163,7 +176,9 @@ class ArticleController extends Controller
             'title' => $request->title,
             'content' => $request->content,
             'image' => $path,
-            'event_id' => $event_id
+            'event_id' => $event_id,
+            'post_date' => Carbon::parse($request->time)
+        
         ]);
 
         if ($article) {

@@ -81,8 +81,14 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item {{ Nav::isRoute('about') }}">
+            <a class="nav-link" href="{{ route('about') }}">
+                <i class="fas fa-fw fa-hands-helping"></i>
+                <span>About Us</span>
+            </a>
+        </li>
         @endif
-
+        
         <!-- <li class="nav-item {{ Nav::isRoute('profile') }}">
             <a class="nav-link" href="{{ route('profile') }}">
                 <i class="fas fa-fw fa-user"></i>

@@ -25,6 +25,23 @@
         </div>
     </div>
     <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Event</label>
+        <div class="col-sm-10">
+            <select name="event_id" class="form-control">
+                <option value="">Tidak Ada Event</option>
+                @foreach($events as $event)
+                <option value="{{ $event->id }}">{{ $event->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Waktu Upload</label>
+        <div class="col-sm-10">
+            <input name="time" type="text" class="form-control datepicker">
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Content</label>
         <div class="col-sm-10">
             <textarea name="content" class="form-control ckeditor"></textarea>
@@ -61,6 +78,10 @@
 @endif
 @endpush
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('datetimepicker/jquery.datetimepicker.min.css') }}">
+@endpush
+
 @push('js')
 <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 <script>
@@ -69,5 +90,12 @@
         .catch(error => {
             console.error(error);
         });
+</script>
+
+<script src="{{ asset('datetimepicker/jquery.datetimepicker.full.min.js') }}"></script> 
+<script>
+    $(function() {
+        $('.datepicker').datetimepicker();
+    });
 </script>
 @endpush 
