@@ -2,27 +2,27 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('List event') }}</h1>
+<h1 class="h3 mb-4 text-gray-800">{{ __('List Article') }}</h1>
 
 <!-- Main Content goes here -->
 
 <div class="container-fluid">
-    @foreach($events as $event)
+    @foreach($articles as $article)
     <div class="row bg-primary text-white p-3 mb-3">
         <div class="col-10">
-            <h3 class="mb-0">{{ $event->name }}</h3>
+            <h3 class="mb-0">{{ $article->title }}</h3>
         </div>
         <div class="col-1">
-            <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">
-                <i class="fa fa-lg fa-edit">Edit</i>
+            <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-primary">
+                <i class="fa fa-lg fa-edit"></i>
             </a>
         </div>
         <div class="col-1">
-            <form action="{{ route('events.destroy', $event->id) }}" method="post">
+            <form action="{{ route('articles.destroy', $article->id) }}" method="post">
                 @csrf
                 @method('delete')
                 <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary">
-                    <i class="fa fa-lg fa-trash">Hapus</i>
+                    <i class="fa fa-lg fa-trash"></i>
                 </button>
             </form>
         </div>
@@ -48,8 +48,4 @@
     {{ session('status') }}
 </div>
 @endif
-<<<<<<< HEAD
-@endpush
-=======
-@endpush
->>>>>>> AdityaFN
+@endpush 

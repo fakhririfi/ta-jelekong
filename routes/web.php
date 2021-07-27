@@ -36,6 +36,12 @@ Route::group(['prefix' => 'events'], function () {
     Route::get('/{id}', 'EventController@show_customer')->name('customer.events.show');
 });
 
+//create group prefix for articles customer
+Route::group(['prefix' => 'articles'], function () {
+    Route::get('/', 'ArticleController@index_customer')->name('customer.articles.index');
+    Route::get('/{id}', 'ArticleController@show_customer')->name('customer.articles.show');
+});
+
 //create middle ware
 Route::group(['middleware' => 'auth'], function () {
     Route::get('register', [AuthController::class, 'registerView'])->name('register');
@@ -48,5 +54,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('schedule', ScheduleController::class);
         Route::post('/events/action',  'EventController@action');
 
+        Route::resource('articles', ArticleController::class);
     });
 });

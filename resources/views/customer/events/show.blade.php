@@ -11,6 +11,7 @@
         <div class="col-sm-6 overflow-hidden" style="height: 400px;">
             <img src="{{ Storage::url($event->image) }}" class="w-100" style="object-fit: cover;">
         </div>
+<<<<<<< HEAD
         <div class="col-sm-6" style="text-align: justify;">
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
             <h4 class="font-weight-bold">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h4>
@@ -41,6 +42,25 @@
                     <td>{{ $event->quota }}</td>
                 </tr>
             </table>
+=======
+        <div class="col-sm-6">
+            <h3 class="font-weight-bold">{{ $event->name }}</h3>
+            <h3 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
+            <p>
+                <span class="font-weight-bold">Penyelenggara: </span>
+                {{ $event->organizer }}
+            </p>
+            <p>
+                <span class="font-weight-bold">Harga Tiket: </span>
+                Rp. {{ number_format($event->price, 0, ',', '.') }}
+            </p>
+            <p class="font-weight-bold">Deskripsi</p>
+            <p>{{ $event->description }}</p>
+            <p>
+                <span class="font-weight-bold">Kuota: </span>
+                {{ $event->quota }}
+            </p>
+>>>>>>> AdityaFN
             <a href="#" class="btn btn-primary w-50 font-weight-bold p-3 {{ $event->quota <= 0 ? 'disabled' : '' }}" {{ $event->quota <= 0 ? 'disabled' : '' }}>
                 Pesan
             </a>
