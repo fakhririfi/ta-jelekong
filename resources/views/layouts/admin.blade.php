@@ -47,13 +47,12 @@
                 </div>
             </div>
         </li>
-<<<<<<< HEAD
         <li class="nav-item {{ request()->routeIs('schedule.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('schedule.index') }}">
                 <i class="fas fa-fw fa-calendar"></i>
                 <span>{{ __('Calendar') }}</span>
             </a>
-=======
+        </li>
         <li class="nav-item {{ Nav::isRoute('articles.*') }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticle" aria-expanded="true" aria-controls="collapseArticle">
                 <i class="fas fa-fw fa-book"></i>
@@ -65,7 +64,6 @@
                     <a class="collapse-item" href="{{ route('articles.index') }}">List Article</a>
                 </div>
             </div>
->>>>>>> AdityaFN
         </li>
         @else
         <li class="nav-item {{ Nav::isRoute('events.*') }}">

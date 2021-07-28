@@ -48,8 +48,4 @@
     {{ session('status') }}
 </div>
 @endif
-<<<<<<< HEAD
 @endpush
-=======
-@endpush
->>>>>>> AdityaFN
