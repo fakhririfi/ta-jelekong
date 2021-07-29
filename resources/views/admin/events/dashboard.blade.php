@@ -3,10 +3,10 @@
 @section('main-content')
 
 <!-- Page Heading -->
-<h1 class="mb-2 text-gray-800">{{ __('Dashboard') }}</h1>
+<h1 class="mb-2 text-gray-800"><b>{{ __('Dashboard') }}</b></h1>
 <div class="row">
     <div class="col-sm-6">
-        <h3 class="mb-4 text-gray-600">Dashboard Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h3>
+        <h4 class="mb-4 text-gray-600">Dashboard Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h4>
     </div>
     <div class="col-sm-6">
         <form action="" method="get" class="text-right">
@@ -38,9 +38,9 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <div class="card shadow mb-4">
+        <div class="card2 shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Total Event</h6>
+                <h6 class="m-0 font-weight-bold text-primary2">Total Event</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
@@ -50,9 +50,9 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="card shadow mb-4">
+        <div class="card2 shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Penyelenggara</h6>
+                <h6 class="m-0 font-weight-bold text-primary2">Penyelenggara</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
@@ -62,9 +62,9 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="card shadow mb-4">
+        <div class="card2 shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Kategori</h6>
+                <h6 class="m-0 font-weight-bold text-primary2">Kategori</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
