@@ -46,7 +46,7 @@ class EventController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
 
         //month count
@@ -54,6 +54,9 @@ class EventController extends Controller
         
         $countData = [];
         $year = Carbon::now()->year;
+        if($request->query('year') != null){
+            $year = $request->query('year');
+        }
         foreach($months as $month){
             $event = Event::whereMonth('time', $month)
             ->whereYear('time', $year)

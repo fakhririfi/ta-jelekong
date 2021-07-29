@@ -4,7 +4,22 @@
 
 <!-- Page Heading -->
 <h1 class="mb-2 text-gray-800">{{ __('Dashboard') }}</h1>
-<h3 class="mb-4 text-gray-600">Dashboard Event untuk tahun {{ date('Y') }}</h3>
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="mb-4 text-gray-600">Dashboard Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h3>
+    </div>
+    <div class="col-sm-6">
+        <form action="" method="get" class="text-right">
+            <select name="year" class="form-control w-50 d-inline">
+                <option value="2021" {{ Request::get('year') == '2021' ? 'selected' : '' }}>2021</option>
+                <option value="2022" {{ Request::get('year') == '2022' ? 'selected' : '' }}>2022</option>
+                <option value="2023" {{ Request::get('year') == '2023' ? 'selected' : '' }}>2023</option>
+                <option value="2024" {{ Request::get('year') == '2024' ? 'selected' : '' }}>2024</option>
+            </select>
+            <button class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+</div>
 
 @if (session('success'))
 <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
