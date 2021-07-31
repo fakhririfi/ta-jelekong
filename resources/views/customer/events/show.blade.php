@@ -15,6 +15,11 @@
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
             <h4 class="font-weight-normal">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h4>
             <table class="table table-borderless">
+            <tr>
+                    <td>Tipe Acara</td>
+                    <td>:</td>
+                    <td>{{ $event->type }}</td>
+                </tr>
                 <tr>
                     <td>Penyelenggara</td>
                     <td>:</td>

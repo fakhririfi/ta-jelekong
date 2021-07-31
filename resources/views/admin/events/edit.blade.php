@@ -39,6 +39,7 @@
                 <option value="Pentas Musik" {{ $event->category == 'Pentas Musik' ? 'selected' : '' }}>Pentas Musik</option> 
                 <option value="Teater" {{ $event->category == 'Teater' ? 'selected' : '' }}>Teater</option>
                 <option value="Pameran" {{ $event->category == 'Pameran' ? 'selected' : '' }}>Pameran</option>
+                <option value="Pameran" {{ $event->category == 'Webinar' ? 'selected' : '' }}>Webinar</option>
             </select>
         </div>
     </div>

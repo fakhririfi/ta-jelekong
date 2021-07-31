@@ -10,7 +10,7 @@
     @foreach($events as $event)
     <div class="row bg-primary2 text-white p-3 mb-3">
         <div class="col-10">
-            <h3 class="mb-0">{{ $event->name }}</h3>
+        <h3 class="mb-0">#{{ $loop->iteration }} {{ $event->name }}</h3>
         </div>
         <div class="col-1">
             <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">

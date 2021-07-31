@@ -39,6 +39,8 @@
                 <option value="Pentas Musik">Pentas Musik</option>
                 <option value="Teater">Teater</option>
                 <option value="Pameran">Pameran</option>
+                <option value="Pameran">Webinar</option>
+                
             </select>
         </div>
     </div>
@@ -46,8 +48,9 @@
         <label class="col-sm-2 col-form-label">Tipe Acara</label>
         <div class="col-sm-10">
             <select name="type" class="form-control">
-                <option value="offline">offline</option>
-                <option value="online">online</option>
+            <option selected="true" value="" disabled="disabled">Pilih Tipe Acara</option>
+                <option value="offline">Offline</option>
+                <option value="online">Online</option>
             </select>
         </div>
     </div>
