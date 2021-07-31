@@ -286,9 +286,6 @@
                     displayColors: false,
                     caretPadding: 10,
                 },
-                legend: {
-                    display: false
-                },
                 cutoutPercentage: 80,
             },
         });

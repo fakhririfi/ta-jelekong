@@ -43,6 +43,15 @@
         </div>
     </div>
     <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Tipe Acara</label>
+        <div class="col-sm-10">
+            <select name="type" class="form-control">
+                <option value="offline" {{ $event->type == 'offline' ? 'selected' : '' }}>offline</option>
+                <option value="online" {{ $event->type == 'online' ? 'selected' : '' }}>online</option>
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Contact Person</label>
         <div class="col-sm-10">
             <input name="contact_person" value="{{ $event->contact_person }}" type="text" class="form-control">

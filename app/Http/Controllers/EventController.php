@@ -123,7 +123,8 @@ class EventController extends Controller
             'contact_person' => 'required',
             'quota' => 'required',
             'image' => 'required',
-            'organizer' => 'required'
+            'organizer' => 'required',
+            'type' => 'required'
         ]);
 
         $path = $request->file('image')->store('events', 'public');
@@ -138,7 +139,8 @@ class EventController extends Controller
             'contact_person' => $request->contact_person,
             'quota' => $request->quota,
             'organizer' => $request->organizer,
-            'image' => $path
+            'image' => $path,
+            'type' => $request->type
         ]);
 
         if ($event) {
@@ -218,6 +220,7 @@ class EventController extends Controller
             'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
+            'type' => 'required'
         ]);
 
         $path = $event->image;
@@ -235,7 +238,8 @@ class EventController extends Controller
             'contact_person' => $request->contact_person,
             'organizer' => $request->organizer,
             'quota' => $request->quota,
-            'image' => $path
+            'image' => $path,
+            'type' => $request->type
         ]);
 
         if ($event) {

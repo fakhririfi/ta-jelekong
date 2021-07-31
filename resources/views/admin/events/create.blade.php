@@ -43,6 +43,15 @@
         </div>
     </div>
     <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Tipe Acara</label>
+        <div class="col-sm-10">
+            <select name="type" class="form-control">
+                <option value="offline">offline</option>
+                <option value="online">online</option>
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Contact Person</label>
         <div class="col-sm-10">
             <input name="contact_person" type="text" class="form-control" placeholder="Masukkan contact person">

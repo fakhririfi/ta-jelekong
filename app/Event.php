@@ -21,6 +21,7 @@ class Event extends Model
         'image',
         'organizer',
         'category',
-        'contact_person'
+        'contact_person',
+        'type'
     ];
 }
