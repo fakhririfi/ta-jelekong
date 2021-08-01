@@ -39,8 +39,8 @@
                 <option value="Pentas Musik">Pentas Musik</option>
                 <option value="Teater">Teater</option>
                 <option value="Pameran">Pameran</option>
-                <option value="Pameran">Webinar</option>
-                
+                <option value="Webinar">Webinar</option>
+
             </select>
         </div>
     </div>

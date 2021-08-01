@@ -15,9 +15,15 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $events = Event::all();
+        $events = [];
+        if($request->query('year') != null){
+            $events = Event::whereYear('time', $request->query('year'))
+                            ->get();
+        }else{
+            $events = Event::all();
+        }
 
         return view('admin.events.index')->with([
             'events' => $events
@@ -77,7 +83,7 @@ class EventController extends Controller
         }
 
         //category
-        $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran'];
+        $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran','Webinar'];
         $categoryData = [];
         foreach($categories as $category)
         {

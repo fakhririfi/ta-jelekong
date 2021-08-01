@@ -7,6 +7,25 @@
 <!-- Main Content goes here -->
 
 <div class="container-fluid">
+
+
+<div class="row">
+        <div class="col-sm-6">
+            <h3 class="mb-4 text-gray-600">List Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h3>
+        </div>
+        <div class="col-sm-6">
+            <form action="" method="get" class="text-right">
+                <select name="year" class="form-control w-50 d-inline">
+                    <option value="2021" {{ Request::get('year') == '2021' ? 'selected' : '' }}>2021</option>
+                    <option value="2022" {{ Request::get('year') == '2022' ? 'selected' : '' }}>2022</option>
+                    <option value="2023" {{ Request::get('year') == '2023' ? 'selected' : '' }}>2023</option>
+                    <option value="2024" {{ Request::get('year') == '2024' ? 'selected' : '' }}>2024</option>
+                </select>
+                <button class="btn btn-primary">Filter</button>
+            </form>
+        </div>
+    </div>
+
     @foreach($events as $event)
     <div class="row bg-primary2 text-white p-3 mb-3">
         <div class="col-10">
