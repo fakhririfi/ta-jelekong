@@ -17,9 +17,12 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
+        $events = Event::all();
 
         return view('admin.articles.index')->with([
-            'articles' => $articles
+
+            'articles' => $articles,
+            'events' => $events
         ]);
 
     }
@@ -116,6 +119,8 @@ class ArticleController extends Controller
         if($article->event_id != null){
             $event = Event::find($article->event_id);
         }
+
+        $article-> increment('visitor');
 
         return view('customer.articles.show')->with([
             'article' => $article,
