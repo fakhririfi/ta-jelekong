@@ -269,7 +269,7 @@
                 labels: categories,
                 datasets: [{
                     data: categoryData,
-                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#5b5b5b'],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#5b5b5b','#e8e065'],
                     hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
                 }],

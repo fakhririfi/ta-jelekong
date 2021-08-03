@@ -40,6 +40,7 @@
                 <option value="Teater" {{ $event->category == 'Teater' ? 'selected' : '' }}>Teater</option>
                 <option value="Pameran" {{ $event->category == 'Pameran' ? 'selected' : '' }}>Pameran</option>
                 <option value="Webinar" {{ $event->category == 'Webinar' ? 'selected' : '' }}>Webinar</option>
+                <option value="Webinar" {{ $event->category == 'Seminar' ? 'selected' : '' }}>Seminar</option>
             </select>
         </div>
     </div>

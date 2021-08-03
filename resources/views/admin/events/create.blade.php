@@ -40,6 +40,7 @@
                 <option value="Teater">Teater</option>
                 <option value="Pameran">Pameran</option>
                 <option value="Webinar">Webinar</option>
+                <option value="Seminar">Seminar</option>
 
             </select>
         </div>
