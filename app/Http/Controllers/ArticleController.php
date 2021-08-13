@@ -163,7 +163,6 @@ class ArticleController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'content' => 'required',
-            'image' => 'required',
              'time' => 'required'
         ]);
 
