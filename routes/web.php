@@ -48,6 +48,7 @@ Route::group(['prefix' => 'transactions'], function () {
 
     Route::get('/payment/{code}', 'TransactionController@payment')->name('customer.transactions.payment');
     Route::post('/payment/{code}/process', 'TransactionController@payment_process')->name('customer.transactions.payment.process');
+    Route::get('/payment/{code}/cancel', 'TransactionController@payment_cancel')->name('customer.transactions.payment.cancel');
 
     Route::get('/e-ticket/{code}', 'TransactionController@eticket')->name('customer.transactions.eticket');
 });
