@@ -92,7 +92,7 @@
         </div>
     </div>
     <div class="mb-3 row">
-        <label class="col-sm-2 col-form-label">Upload</label>
+        <label class="col-sm-2 col-form-label">Unggah</label>
         <div class="col-sm-10">
             <input name="image" type="file" class="form-control-plaintext">
         </div>
