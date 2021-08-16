@@ -25,6 +25,21 @@ class EventController extends Controller
     }
 
     /**
+     * Display a listing of the resource for customer.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_customer()
+    {
+        $current_events = Event::whereBetween('time', [Carbon::now(), Carbon::now()->addWeek(1)])->get();
+        $future_events = Event::where('time', '>', Carbon::now()->addWeek(1))->get();
+
+        return view('customer.events.index')->with([
+            'current_events' => $current_events,
+            'future_events' => $future_events,
+        ]);
+    }
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
