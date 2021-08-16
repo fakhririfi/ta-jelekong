@@ -15,7 +15,6 @@
     <h1 class="h3 mb-4 text-gray-800">{{ __('Manage Event') }} - {{ $event->name }}</h1>
 
     <!-- Main Content goes here -->
-    {{-- <button type="button" class="btn btn-primary mb-4" onclick="addTask()">Primary</button> --}}
     <div id="task" class="d-flex flex-row flex-nowrap overflow-auto">
         <div class="col-md-3" style="min-width: 300px">
             <div class="card">
@@ -128,10 +127,6 @@
                                             class="fas fa-plus"></i></button>
                                 </div>
                             </form>
-
-                            {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                Launch demo modal
-                            </button> --}}
                             @foreach ($tahap->details as $detail)
                                 <div class="list-group mb-2">
                                     <div class="list-group-item list-group-item-action flex-column align-items-start p-2">
@@ -177,16 +172,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        {{-- <h5 class="list-header-target mb-1"></h5> --}}
-                        {{-- <textarea class="list-header-name-input" name="list-header-name" id="" maxlength="512" style="overflow: hidden; overflow-wrap: break-word; height: 28px;"></textarea> --}}
                         <input type="text" name="nama" class="form-control" placeholder="Nama Event">
                     </div>
-                    {{-- <div class="card-body"> --}}
-                    {{-- <div class="input-group">
-                        <input type="text" name="content" class="form-control" placeholder="Add your new todo">
-                        <button type="submit" class="btn btn-dark btn-sm px-4"><i class="fas fa-plus"></i></button>
-                    </div> --}}
-                    {{-- </div> --}}
                     <div class="card-footer text-muted">
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
