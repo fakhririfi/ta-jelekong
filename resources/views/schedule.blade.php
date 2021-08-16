@@ -1,4 +1,3 @@
-
 @extends('layouts.calendaradmin')
 
 @section('main-content')
@@ -20,23 +19,26 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="time">Waktu Mulai</label>
-                        <input type="text" class="form-control datepicker" id="modalTime" disabled placeholder="Waktu Mulai"/>
+                        <input type="text" class="form-control datepicker" id="modalTime" disabled
+                            placeholder="Waktu Mulai" />
                     </div>
                     <div id="groupEnd" class="form-group">
                         <label for="end">Waktu selesai</label>
-                        <input type="text" class="form-control datepicker" id="modalEnd" disabled placeholder="Waktu Selesai"/>
+                        <input type="text" class="form-control datepicker" id="modalEnd" disabled
+                            placeholder="Waktu Selesai" />
                     </div>
                     <div id="groupCategory" class="form-group">
                         <label for="category">Kategori</label>
-                        <input type="text" class="form-control" id="modalCategory" disabled placeholder="Kategori"/>
+                        <input type="text" class="form-control" id="modalCategory" disabled placeholder="Kategori" />
                     </div>
                     <div class="form-group">
                         <label for="contact_person">Contact Person</label>
-                        <input type="text" class="form-control" id="modalContact_person" disabled placeholder="Contact Person"/>
+                        <input type="text" class="form-control" id="modalContact_person" disabled
+                            placeholder="Contact Person" />
                     </div>
                     <div class="form-group">
                         <label for="location">Lokasi</label>
-                        <input type="text" class="form-control" id="modalLocation" disabled placeholder="Lokasi"/>
+                        <input type="text" class="form-control" id="modalLocation" disabled placeholder="Lokasi" />
                     </div>
                     <div class="form-group">
                         <label for="description">Deskripsi</label>
@@ -44,33 +46,33 @@
                     </div>
                     <div class="form-group">
                         <label for="organizer">Penyelenggara</label>
-                        <input type="text" class="form-control" id="modalOrganizer" disabled placeholder="Penyelenggara"/>
+                        <input type="text" class="form-control" id="modalOrganizer" disabled placeholder="Penyelenggara" />
                     </div>
                     <div id="groupPrice" class="form-group">
                         <label for="price">Harga Tiket</label>
-                        <input type="text" class="form-control" id="modalPrice" disabled placeholder="Harga Tiket"/>
+                        <input type="text" class="form-control" id="modalPrice" disabled placeholder="Harga Tiket" />
                     </div>
                     <div id="groupKuota" class="form-group">
                         <label for="quota">Kuota</label>
-                        <input type="text" class="form-control" id="modalQuota" disabled placeholder="Kuota"/>
+                        <input type="text" class="form-control" id="modalQuota" disabled placeholder="Kuota" />
                     </div>
-                    </div>
-                    <div id="modalAction" class="modal-footer">
+                </div>
+                <div id="modalAction" class="modal-footer">
                     <form id="formDelete" action="#" method="post">
-                @csrf
-                @method('delete')
-                <button type="submit" onclick="return confirm('Apakah Anda Yakin?')" class="btn btn-primary">
-                    Delete
-                </button>
-            </form>
-            <a  id="btnUpdate" href="#" class="btn btn-secondary">
-                Edit
-            </a>
+                        @csrf
+                        @method('delete')
+                        <button type="submit" onclick="return confirm('Apakah Anda Yakin?')" class="btn btn-primary">
+                            Delete
+                        </button>
+                    </form>
+                    <a id="btnUpdate" href="#" class="btn btn-secondary">
+                        Edit
+                    </a>
 
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- End of Main Content -->
 @endsection
@@ -91,5 +93,3 @@
         </div>
     @endif
 @endpush
-
-

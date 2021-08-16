@@ -27,4 +27,8 @@ class Event extends Model
         'schedule',
         'type'
     ];
+    public function tahaps()
+    {
+        return $this->hasMany(Tahap::class);
+    }
 }
