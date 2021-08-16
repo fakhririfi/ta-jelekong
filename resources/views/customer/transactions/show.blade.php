@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row p-3 mb-3 justify-content-center">
         <div class="col-sm-6 m-3">
-        <div class="mb-3 p-3 bg-white">
+            <div class="mb-3 p-3 bg-white">
                 <table class="table table-borderless">
                     <tr>
                         <td>Titel</td>
@@ -73,13 +73,19 @@
                 <h4 class="font-weight-bold">{{ ucwords($transaction->status) }}</h4>
             </div>
 
-            @if(Auth::check() && $transaction->status != 'paid')
+            @if($transaction->status != 'paid')
             <form action="{{ route('transactions.confirmation', $transaction->code) }}" method="post" class="text-right">
                 @csrf
                 <div class="col-sm-6 overflow-hidden" style="height: 100px;">
-                    <img src="{{ Storage::url($transaction->proof) }}" class="w-100" style="object-fit: cover;">
+                    @if($transaction->proof != null)
+                    <a href="{{ Storage::url($transaction->proof) }}" data-lightbox="Proof">
+                        <img src="{{ Storage::url($transaction->proof) }}" class="w-100" style="object-fit: cover;">
+                    </a>
+                    @endif
                 </div>
+                @if(Auth::check())
                 <button class="btn btn-primary">Konfirmasi</button>
+                @endif
             </form>
             @endif
 
@@ -124,4 +130,12 @@
     {{ session('status') }}
 </div>
 @endif
+@endpush
+
+@push('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+@endpush
+
+@push('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 @endpush
