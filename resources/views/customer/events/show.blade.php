@@ -28,9 +28,31 @@
                 <span class="font-weight-bold">Kuota: </span>
                 {{ $event->quota }}
             </p>
-            <a href="#" class="btn btn-primary w-50 font-weight-bold p-3 {{ $event->quota <= 0 ? 'disabled' : '' }}" {{ $event->quota <= 0 ? 'disabled' : '' }}>
+            <button type="button" class="btn btn-primary w-50 font-weight-bold p-3 {{ $event->quota <= 0 ? 'disabled' : '' }}" data-toggle="modal" data-target="#exampleModalCenter" {{ $event->quota <= 0 ? 'disabled' : '' }}>
                 Pesan
-            </a>
+            </button>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="{{ route('customer.transactions.confirmation', $event->id) }}" method="get">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Pemesanan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="">Masukan Jumlah Tiket</label>
+                        <input type="number" class="form-control" name="ticket">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Pesan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
