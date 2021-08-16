@@ -69,12 +69,9 @@ class EventController extends Controller
 
         $countData = [];
         $year = Carbon::now()->year;
-<<<<<<< HEAD
-=======
         if ($request->query('year') != null) {
             $year = $request->query('year');
         }
->>>>>>> madedarmawijaya
         foreach ($months as $month) {
             $event = Event::whereMonth('time', $month)
                 ->whereYear('time', $year)
@@ -85,10 +82,7 @@ class EventController extends Controller
         //organizer count
         $events = Event::select('organizer', DB::raw('count(*) as total'))
             ->groupBy('organizer')
-<<<<<<< HEAD
-=======
             ->whereYear('time', $year)
->>>>>>> madedarmawijaya
             ->get();
 
         $organizer = [];
@@ -102,13 +96,9 @@ class EventController extends Controller
         $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran','Webinar','Seminar'];
         $categoryData = [];
         foreach ($categories as $category) {
-<<<<<<< HEAD
-            $event = Event::where('category', $category)->count();
-=======
             $event = Event::where('category', $category)
                 ->whereYear('time', $year)
                 ->count();
->>>>>>> madedarmawijaya
             array_push($categoryData, $event);
         }
 
@@ -167,11 +157,8 @@ class EventController extends Controller
             'quota' => $request->quota,
             'organizer' => $request->organizer,
             'image' => $path,
-<<<<<<< HEAD
-            'user_id' =>  $request->user()->id
-=======
+            'user_id' =>  $request->user()->id,
             'type' => $request->type
->>>>>>> madedarmawijaya
         ]);
 
         if ($event) {
