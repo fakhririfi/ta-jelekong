@@ -2,14 +2,33 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Ticketing</h1>
+<h1 class="h3 mb-4 text-gray-800">Cari Tiket</h1>
 
 <!-- Main Content goes here -->
 
 <div class="container-fluid">
-    <div class="row p-3 mb-3 justify-content-center">
-        <div class="col-sm-12 m-3">
-
+    <div class="row p-3 mb-3 justify-content-left">
+        <div class="col-sm-4 m-3 bg-white p-5">
+            <p>Cek Pesanan Disini</p>
+            @if ($errors->any())
+            <div class="alert alert-danger border-left-danger" role="alert">
+                <ul class="pl-4 my-2">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            <form action="{{ route('customer.transactions.ticketing.search') }}" method="post" class="row justify-content-center">
+                @csrf
+                <div class="col-sm-12">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Masukan Order ID</label>
+                        <input type="text" name="code" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cek Pesanan</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -44,4 +63,4 @@
         $(this).siblings(".custom-file-label").css("text-overflow", "ellipsis");
     });
 </script>
-@endpush 
+@endpush
