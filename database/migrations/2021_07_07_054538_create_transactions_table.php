@@ -25,6 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('phone');
+            $table->string('proof')->nullable();
             $table->string('status');
             $table->timestamps();
         });

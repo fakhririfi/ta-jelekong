@@ -10,6 +10,38 @@
     <div class="row p-3 mb-3 justify-content-center">
         <div class="col-sm-6 m-3">
             <div class="mb-3 p-3 bg-white">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Titel</td>
+                        <td>{{ $transaction->title }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Depan</td>
+                        <td>{{ $transaction->first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Belakang</td>
+                        <td>{{ $transaction->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ $transaction->email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nomor Telephone</td>
+                        <td>{{ $transaction->phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Tiket</td>
+                        <td>{{ $transaction->ticket }} Tiket</td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td>{{ $transaction->event->category }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="mb-3 p-3 bg-white">
                 <p>Silahkan Transfer Ke</p>
                 <table class="table">
                     <tr>
@@ -37,6 +69,8 @@
             <form action="{{ route('customer.transactions.payment.process', $transaction->code) }}" method="post" enctype="multipart/form-data" class="text-right">
                 @csrf
                 <div class="mb-3 p-3 bg-white text-left">
+                    <p>Countdown Transfer</p>
+                    <h2 class="mb-3 text-center font-weight-bold" id="jam"></h2>
                     <p>Upload Bukti Transfer</p>
                     @if ($errors->any())
                     <div class="alert alert-danger border-left-danger" role="alert">
@@ -53,6 +87,8 @@
                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                         </div>
                     </div>
+                    <p>Jika sudah melakukan pembayaran silahkan upload bukti dan hubungi admin di nomor berikut:</p>
+                    <h5 class="font-weight-bold text-center">08512345601</h5>
                 </div>
                 <button type="submit" class="btn btn-primary">Lanjutkan</button>
             </form>
@@ -60,6 +96,16 @@
         <div class="col-sm-3 bg-white m-3 h-100 p-5">
             <p>Order ID</p>
             <h1>{{ $transaction->code }}</h1>
+            <hr>
+            <div class="overflow-hidden" style="height: 100px;">
+                <img src="{{ Storage::url($transaction->event->image) }}" class="w-100" style="object-fit: cover;">
+            </div>
+            <h3 class="font-weight-bold">{{ $transaction->event->name }}</h3>
+            <h5 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($transaction->event->time)) }}</h5>
+            <p>
+                <span class="font-weight-bold">Penyelenggara: </span>
+                {{ $transaction->event->organizer }}
+            </p>
         </div>
     </div>
 </div>
@@ -93,5 +139,26 @@
         $(this).siblings(".custom-file-label").css("white-space", "nowrap");
         $(this).siblings(".custom-file-label").css("text-overflow", "ellipsis");
     });
+    // Set the date we're counting down to
+    var countDownDate = new Date("{{ Carbon\Carbon::parse($transaction->updated_at)->addHour(2) }}").getTime();
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+        // Get today's date and time
+        var now = new Date().getTime();
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Display the result in the element with id="demo"
+        document.getElementById("jam").innerHTML = `${hours} Jam : ${minutes} Menit : ${seconds} Detik`;
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("jam").innerHTML = "EXPIRED";
+        }
+    }, 1000);
 </script>
-@endpush 
+@endpush

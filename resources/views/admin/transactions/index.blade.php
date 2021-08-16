@@ -13,8 +13,13 @@
             <label for="" class="mb-2 d-block">Filter Event</label>
             <select name="event_id" class="form-control mb-2">
                 @foreach($events as $event)
-                <option value="{{ $event->id }}" {{ Request::get('filter') == '$event->id' ? 'selected' : '' }}>{{ $event->name }}</option>
+                <option value="{{ $event->id }}" {{ Request::get('event_id') == $event->id ? 'selected' : '' }}>{{ $event->name }}</option>
                 @endforeach
+            </select>
+            <select name="status" class="form-control mb-2">
+                <option value="" {{ Request::get('status') == 'all' ? 'selected' : '' }}>Semua</option>
+                <option value="paid" {{ Request::get('status') == 'paid' ? 'selected' : '' }}>Sudah Bayar</option>
+                <option value="payment" {{ Request::get('status') == 'payment' ? 'selected' : '' }}>Belum Bayar</option>
             </select>
             <button type="submit" class="btn btn-primary">Filter</button>
         </div>
@@ -26,7 +31,7 @@
             <h3 class="mb-0">{{ $transaction->code }}</h3>
         </div>
         <div class="col-1">
-            <a href="{{ route('events.edit', $transaction->id) }}" class="btn btn-primary">
+            <a href="{{ route('customer.transactions.ticketing.show', $transaction->code) }}" class="btn btn-primary">
                 <i class="fa fa-lg fa-edit"></i>
             </a>
         </div>
@@ -52,4 +57,4 @@
     {{ session('status') }}
 </div>
 @endif
-@endpush 
+@endpush

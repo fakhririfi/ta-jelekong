@@ -9,6 +9,38 @@
 <div class="container-fluid">
     <div class="row p-3 mb-3 justify-content-center">
         <div class="col-sm-6 m-3">
+        <div class="mb-3 p-3 bg-white">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Titel</td>
+                        <td>{{ $transaction->title }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Depan</td>
+                        <td>{{ $transaction->first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Belakang</td>
+                        <td>{{ $transaction->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ $transaction->email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nomor Telephone</td>
+                        <td>{{ $transaction->phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Tiket</td>
+                        <td>{{ $transaction->ticket }} Tiket</td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td>{{ $transaction->event->category }}</td>
+                    </tr>
+                </table>
+            </div>
             <div class="mb-3 p-3 bg-white">
                 <table class="table table-borderless">
                     <tr>
@@ -30,7 +62,7 @@
                     </tr>
                 </table>
             </div>
-            @if($transaction->status != 'paid')
+            @if($transaction->status != 'paid' && !Auth::check())
             <div class="mb-3 p-3 bg-white">
                 <p>Informasi Penting:</p>
                 <ol>
@@ -44,10 +76,36 @@
                 <p>Status Transaksi</p>
                 <h4 class="font-weight-bold">{{ ucwords($transaction->status) }}</h4>
             </div>
+
+            @if(Auth::check() && $transaction->status != 'paid')
+            <form action="{{ route('transactions.confirmation', $transaction->code) }}" method="post" class="text-right">
+                @csrf
+                <div class="col-sm-6 overflow-hidden" style="height: 100px;">
+                    <img src="{{ Storage::url($transaction->proof) }}" class="w-100" style="object-fit: cover;">
+                </div>
+                <button class="btn btn-primary">Konfirmasi</button>
+            </form>
+            @endif
+
+            @if($transaction->status == 'paid')
+            <div class="text-right">
+                <a href="{{ route('customer.transactions.eticket', $transaction->code) }}" target="_blank" class="btn btn-primary">Cetak E-Ticket</a>
+            </div>
+            @endif
         </div>
         <div class="col-sm-3 bg-white m-3 h-100 p-5">
             <p>Order ID</p>
             <h1>{{ $transaction->code }}</h1>
+            <hr>
+            <div class="overflow-hidden" style="height: 100px;">
+                <img src="{{ Storage::url($transaction->event->image) }}" class="w-100" style="object-fit: cover;">
+            </div>
+            <h3 class="font-weight-bold">{{ $transaction->event->name }}</h3>
+            <h5 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($transaction->event->time)) }}</h5>
+            <p>
+                <span class="font-weight-bold">Penyelenggara: </span>
+                {{ $transaction->event->organizer }}
+            </p>
         </div>
     </div>
 </div>
@@ -71,15 +129,3 @@
 </div>
 @endif
 @endpush
-
-@push('js')
-<script>
-    $(".custom-file-input").on("change", function() {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        $(this).siblings(".custom-file-label").css("overflow", "hidden");
-        $(this).siblings(".custom-file-label").css("white-space", "nowrap");
-        $(this).siblings(".custom-file-label").css("text-overflow", "ellipsis");
-    });
-</script>
-@endpush 

@@ -56,6 +56,19 @@
                 </div>
             </div>
         </li>
+        <li class="nav-item {{ Nav::isRoute('transactions.*') }}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ticketingCollapse" aria-expanded="true" aria-controls="ticketingCollapse">
+                <i class="fas fa-fw fa-search"></i>
+                <span>Ticketing</span>
+            </a>
+            <div id="ticketingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('transactions.dashboard') }}">Dashboard Ticket</a>
+                    <a class="collapse-item" href="{{ route('customer.transactions.ticketing') }}">Cari Ticket</a>
+                    <a class="collapse-item" href="{{ route('transactions.index') }}">List Ticket</a>
+                </div>
+            </div>
+        </li>
         @else
         <li class="nav-item {{ Nav::isRoute('events.*') }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -67,6 +80,12 @@
                     <a class="collapse-item" href="{{ route('customer.events.index') }}">List Event</a>
                 </div>
             </div>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('transactions.*') }}">
+            <a class="nav-link" href="{{ route('customer.transactions.ticketing') }}">
+                <i class="fas fa-fw fa-search"></i>
+                <span>Ticketing</span>
+            </a>
         </li>
         @endif
 
@@ -141,7 +160,7 @@
                     </li>
 
                 </ul>
-                @endif
+                @endif                    
             </nav>
             <!-- End of Topbar -->
 

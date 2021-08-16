@@ -12,6 +12,38 @@
             <div class="mb-3 p-3 bg-white">
                 <table class="table table-borderless">
                     <tr>
+                        <td>Titel</td>
+                        <td>{{ $transaction->title }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Depan</td>
+                        <td>{{ $transaction->first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Belakang</td>
+                        <td>{{ $transaction->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ $transaction->email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nomor Telephone</td>
+                        <td>{{ $transaction->phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Tiket</td>
+                        <td>{{ $transaction->ticket }} Tiket</td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td>{{ $transaction->event->category }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="mb-3 p-3 bg-white">
+                <table class="table table-borderless">
+                    <tr>
                         <td>Harga</td>
                         <td>Rp. {{ number_format($transaction->amount - 2000, 0, ',', '.') }}</td>
                     </tr>
@@ -51,6 +83,16 @@
         <div class="col-sm-3 bg-white m-3 h-100 p-5">
             <p>Order ID</p>
             <h1>{{ $transaction->code }}</h1>
+            <hr>
+            <div class="overflow-hidden" style="height: 100px;">
+                <img src="{{ Storage::url($transaction->event->image) }}" class="w-100" style="object-fit: cover;">
+            </div>
+            <h3 class="font-weight-bold">{{ $transaction->event->name }}</h3>
+            <h5 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($transaction->event->time)) }}</h5>
+            <p>
+                <span class="font-weight-bold">Penyelenggara: </span>
+                {{ $transaction->event->organizer }}
+            </p>
         </div>
     </div>
 </div>
@@ -73,4 +115,4 @@
     {{ session('status') }}
 </div>
 @endif
-@endpush 
+@endpush

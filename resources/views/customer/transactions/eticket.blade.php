@@ -38,6 +38,10 @@
                         <h4 class="font-weight-bold">{{ ucwords($transaction->status) }}</h4>
                         <p>Tanggal Pesan</p>
                         <h4 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($transaction->created_at)) }}</h4>
+                        <p>Order ID</p>
+                        <h4 class="font-weight-bold">{{ $transaction->code }}</h4>
+                        <p>Pemesanan</p>
+                        <h4 class="font-weight-bold">{{ $transaction->ticket }} Tiket</h4>
                     </div>
                 </div>
                 <div class="card mb-3 bg-white">
@@ -46,6 +50,13 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless">
+                            <tr>
+                            <td colspan="2">
+                                <div class="overflow-hidden mb-3" style="height: 200px;">
+                                    <img src="{{ Storage::url($transaction->event->image) }}" class="w-100" style="object-fit: cover;">
+                                </div>
+                            </tr>
+                            </td>
                             <tr>
                                 <td>Nama</td>
                                 <td>{{ $transaction->event->name }}</td>

@@ -20,4 +20,9 @@ class Event extends Model
         'quota',
         'image'
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'event_id');
+    }
 }

@@ -44,6 +44,15 @@
             <h1 class="text-center font-weight-bold">Detail Pemesanan</h1>
             <h1 class="text-center font-weight-bold">Mohon Konfirmasi Data Anda</h1>
         </div>
+        @if ($errors->any())
+        <div class="alert alert-danger border-left-danger" role="alert">
+            <ul class="pl-4 my-2">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <form action="{{ route('customer.transactions.confirmation.process', $event->id) }}" method="post" class="row justify-content-center">
             @csrf
             <input name="ticket" value="{{ Request('ticket') }}" type="text" hidden>
