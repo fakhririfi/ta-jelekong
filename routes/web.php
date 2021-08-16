@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Whoops\Run;
 use App\Http\Controllers\ScheduleController;
 
-use Whoops\Run;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,17 @@ Route::get('/about', function () {
 Route::get('/blank', function () {
     return view('blank');
 })->name('blank');
+
+//create middle ware
+Route::group(['middleware' => 'auth'], function() {
+
+    //create group prefix for admin
+    Route::group(['prefix'=>'admin'], function() {
+
+        Route::resource('events', EventController::class);
+
+    });
+});
 
 //create group prefix for events customer
 Route::group(['prefix' => 'events'], function () {
