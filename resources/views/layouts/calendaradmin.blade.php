@@ -71,19 +71,54 @@
                     <span>{{ __('Calendar') }}</span>
                 </a>
             </li>
-            @else
-            <li class="nav-item {{ Nav::isRoute('events.*') }}">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-list"></i>
-                    <span>Events</span>
+            <li class="nav-item {{ request()->routeIs('manageevent.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('manageevent.index') }}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>{{ __('Manage Event') }}</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('customer.events.index') }}">List Event</a>
-                    </div>
-                </div>
             </li>
-            @endif
+            <li class="nav-item {{ Nav::isRoute('articles.*') }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticle" aria-expanded="true" aria-controls="collapseArticle">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>Articles</span>
+                    </a>
+                    <div id="collapseArticle" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('articles.create') }}">Buat Article</a>
+                            <a class="collapse-item" href="{{ route('articles.index') }}">List Article</a>
+                        </div>
+                    </div>
+                </li>
+            @else
+                <li class="nav-item {{ Nav::isRoute('events.*') }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-list"></i>
+                        <span>Events</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('customer.events.index') }}">List Event</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('articles.*') }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticle" aria-expanded="true" aria-controls="collapseArticle">
+                        <i class="fas fa-fw fa-book"></i>
+                        <span>Articles</span>
+                    </a>
+                    <div id="collapseArticle" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('customer.articles.index') }}">List Article</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('about') }}">
+                    <a class="nav-link" href="{{ route('about') }}">
+                        <i class="fas fa-fw fa-hands-helping"></i>
+                        <span>About Us</span>
+                    </a>
+                </li>
+        @endif
 
 
             <!-- <li class="nav-item {{ Nav::isRoute('profile') }}">
@@ -241,14 +276,30 @@
             allDaySlot:false,
             select:function(start, end, allDay)
             {
-                const tambah  = confirm('Apakah Anda Ingin Menambah jadwal?')
-                start = moment(start).format('YYYY/MM/DD HH:mm');
-                end =  moment(end).format('YYYY/MM/DD HH:mm');
-                if(tambah){
-                    $(location).attr("href", `${SITEURL}/schedule/create?start=${start}&end=${end}`);
-                }else{
-                    calendar.fullCalendar('refetchEvents');
-                }
+                tanggal = moment(start).format('YYYYMMDD');
+                $.ajax({
+                    url: SITEURL + "/events/cektanggal",
+                    type: 'POST',
+                    data:{
+                        tanggal : tanggal
+                    },
+                    success:function(response)
+                    {
+                        if(!response.merah){
+                            start = moment(start).format('YYYY/MM/DD HH:mm');
+                            const tambah  = confirm('Apakah Anda Ingin Menambah jadwal?')
+                            end =  moment(end).format('YYYY/MM/DD HH:mm');
+                            if(tambah){
+                                $(location).attr("href", `${SITEURL}/schedule/create?start=${start}&end=${end}`);
+                            }else{
+                                calendar.fullCalendar('refetchEvents');
+                            }
+                        }else{
+                            alert(`Tanggal merah ${response.data.deskripsi}`)
+                        }
+                    }
+                })
+
             },
             eventResize: function(event, delta)
             {
@@ -274,24 +325,41 @@
 
             eventDrop: function(event, delta)
             {
-                var start = $.fullCalendar.formatDate(event.start, "YYYY-MM-DD HH:mm");
-                var end = $.fullCalendar.formatDate(event.end,  "YYYY-MM-DD HH:mm");
-                var id = event.id;
+                tanggal = moment(event.start).format('YYYYMMDD');
                 $.ajax({
-                    url: SITEURL + "/events/action",
-                    type:"POST",
+                    url: SITEURL + "/events/cektanggal",
+                    type: 'POST',
                     data:{
-                        start: start,
-                        end: end,
-                        id: id,
-                        type: 'update'
+                        tanggal : tanggal
                     },
                     success:function(response)
                     {
-                        calendar.fullCalendar('refetchEvents');
-                        alert("Event Updated Successfully");
+                        if(!response.merah){
+                            var start = $.fullCalendar.formatDate(event.start, "YYYY-MM-DD HH:mm");
+                            var end = $.fullCalendar.formatDate(event.end,  "YYYY-MM-DD HH:mm");
+                            var id = event.id;
+                            $.ajax({
+                                url: SITEURL + "/events/action",
+                                type:"POST",
+                                data:{
+                                    start: start,
+                                    end: end,
+                                    id: id,
+                                    type: 'update'
+                                },
+                                success:function(response)
+                                {
+                                    alert("Event Updated Successfully");
+                                    calendar.fullCalendar('refetchEvents');
+                                }
+                            })
+                        }else{
+                            alert(`Tanggal merah ${response.data.deskripsi}`)
+                            calendar.fullCalendar('refetchEvents');
+                        }
                     }
                 })
+
             },
 
             eventClick:function(event)

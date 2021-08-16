@@ -283,4 +283,14 @@ class EventController extends Controller
             }
         }
     }
+    public function isTanggalMerah(Request $request)
+    {
+
+        $array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"), true);
+
+        if (isset($array[$request->tanggal])) {
+            return response()->json(['merah' => true, 'data' => $array[$request->tanggal]]);
+        }
+        return response()->json(['merah' => false]);
+    }
 }
