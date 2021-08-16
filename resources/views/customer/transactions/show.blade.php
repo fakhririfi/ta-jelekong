@@ -35,10 +35,6 @@
                         <td>Jumlah Tiket</td>
                         <td>{{ $transaction->ticket }} Tiket</td>
                     </tr>
-                    <tr>
-                        <td>Kategori</td>
-                        <td>{{ $transaction->event->category }}</td>
-                    </tr>
                 </table>
             </div>
             <div class="mb-3 p-3 bg-white">
