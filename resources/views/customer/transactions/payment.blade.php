@@ -90,7 +90,7 @@
                     <p>Jika sudah melakukan pembayaran silahkan upload bukti dan hubungi admin di nomor berikut:</p>
                     <h5 class="font-weight-bold text-center">08512345601</h5>
                 </div>
-                <button type="submit" class="btn btn-primary">Lanjutkan</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>
         <div class="col-sm-3 bg-white m-3 h-100 p-5">
