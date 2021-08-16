@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,8 +19,6 @@ class TransactionController extends Controller
     {
 
         $events = Event::all();
-
-
 
         if ($request->query('event_id') != null || $request->query('status') != null) {
             $transactions = Transaction::where(function ($query) use ($request) {
@@ -45,22 +44,35 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        $year = Carbon::now()->year;
+        if ($request->query('year') != null) {
+            $year = $request->query('year');
+        }
+
         $transactions = Transaction::with('event')
             ->select('event_id', DB::raw('sum(ticket) as total'))
             ->groupBy('event_id')
             ->orderBy('total', 'DESC')
+            ->whereYear('created_at', $year)
             ->get();
 
         $events = [];
+        $eventTotal = [];
+        $eventName = [];
         foreach ($transactions as $transaction) {
-            array_push($events, Event::find($transaction->event_id));
+            $event = Event::find($transaction->event_id);
+            array_push($events, $event);
+            array_push($eventTotal, $transaction->total);
+            array_push($eventName, $event->name);
         }
 
         return view('admin.transactions.dashboard')->with([
             'transactions' => $transactions,
-            'events' => $events
+            'events' => $events,
+            'eventsTotal' => json_encode($eventTotal), 
+            'eventsName' => json_encode($eventName)
         ]);
     }
 
@@ -199,6 +211,12 @@ class TransactionController extends Controller
     {
         $event = Event::find($event_id);
 
+        if($event->quota < $request->ticket){
+            return redirect()->back()->withErrors([
+                'ticket' => 'kuota tidak cukup'
+            ]);
+        }
+
         Event::where('id', $event_id)->update([
             'quota' => $event->quota - $request->ticket
         ]);
@@ -292,5 +310,21 @@ class TransactionController extends Controller
         ]);
 
         return redirect(route('customer.transactions.ticketing'));
+    }
+
+    /* payment cancel */
+    public function payment_cancel(Request $request, $code)
+    {
+
+        $transaction = Transaction::where('code', $code)->first();
+        $event = Event::find($transaction->event_id);
+
+        $event->update([
+            'quota' => $event->quota + $transaction->ticket
+        ]);
+
+        $transaction->delete();
+
+        return redirect('/');
     }
 }
