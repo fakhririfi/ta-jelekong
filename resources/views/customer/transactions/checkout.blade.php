@@ -35,10 +35,6 @@
                         <td>Jumlah Tiket</td>
                         <td>{{ $transaction->ticket }} Tiket</td>
                     </tr>
-                    <tr>
-                        <td>Kategori</td>
-                        <td>{{ $transaction->event->category }}</td>
-                    </tr>
                 </table>
             </div>
             <div class="mb-3 p-3 bg-white">
@@ -74,6 +70,9 @@
                 <p>Silahkan bayar ke nomer rekening</p>
                 <h2 class="font-weight-bold">1234567</h2>
                 <h3>BNI</h3>
+            </div>
+            <div class="mb-3 p-3 bg-white text-center">
+                <p>Harap diperhatikan, jika anda sudah melakukan konfirmasi pemesanan, maka anda tidak bisa membatalkan nya</p>
             </div>
             <form action="{{ route('customer.transactions.checkout.process', $transaction->code) }}" method="post" class="text-right">
                 @csrf
