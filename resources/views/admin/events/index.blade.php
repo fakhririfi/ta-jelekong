@@ -8,9 +8,9 @@
 
 <div class="container-fluid">
     @foreach($events as $event)
-    <div class="row bg-primary text-white p-3 mb-3">
+    <div class="row bg-primary text-white p-3">
         <div class="col-10">
-            <h3 class="mb-0">{{ $event->name }}</h3>
+            <h3 class="mb-0">Name</h3>
         </div>
         <div class="col-1">
             <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">
@@ -21,7 +21,7 @@
             <form action="{{ route('events.destroy', $event->id) }}" method="post">
                 @csrf
                 @method('delete')
-                <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary">
+                <button class="btn btn-primary">
                     <i class="fa fa-lg fa-trash"></i>
                 </button>
             </form>
@@ -48,4 +48,4 @@
     {{ session('status') }}
 </div>
 @endif
-@endpush
+@endpush 

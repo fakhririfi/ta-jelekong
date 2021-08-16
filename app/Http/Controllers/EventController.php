@@ -16,26 +16,11 @@ class EventController extends Controller
      */
     public function index()
     {
+        
         $events = Event::all();
 
         return view('admin.events.index')->with([
             'events' => $events
-        ]);
-    }
-
-    /**
-     * Display a listing of the resource for customer.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index_customer()
-    {
-        $current_events = Event::whereBetween('time', [Carbon::now(), Carbon::now()->addWeek(1)])->get();
-        $future_events = Event::where('time', '>', Carbon::now()->addWeek(1))->get();
-
-        return view('customer.events.index')->with([
-            'current_events' => $current_events,
-            'future_events' => $future_events,
         ]);
     }
 
@@ -45,7 +30,9 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+    
     {
+        //
         return view('admin.events.create');
     }
 
@@ -57,7 +44,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
         $this->validate($request, [
             'name' => 'required',
             'time' => 'required',
@@ -66,7 +53,6 @@ class EventController extends Controller
             'price' => 'required',
             'quota' => 'required',
             'image' => 'required',
-            'organizer' => 'required'
         ]);
 
         $path = $request->file('image')->store('events', 'public');
@@ -78,7 +64,6 @@ class EventController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'quota' => $request->quota,
-            'organizer' => $request->organizer,
             'image' => $path
         ]);
 
@@ -105,22 +90,6 @@ class EventController extends Controller
     }
 
     /**
-     * Display the specified resource for customer.
-     *
-     * @param  \App\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function show_customer($id)
-    {
-
-        $event = Event::find($id);
-
-        return view('customer.events.show')->with([
-            'event' => $event
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Event  $event
@@ -128,6 +97,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        //
         if(!$event){
             return redirect()->back()->withErrors([
                 'events' => 'data tidak ditemukan'
@@ -148,16 +118,17 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        //
 
         $this->validate($request, [
             'name' => 'required',
             'time' => 'required',
             'location' => 'required',
             'description' => 'required',
-            'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
         ]);
+
 
         $path = $event->image;
         if(isset($request->image)){
@@ -170,7 +141,6 @@ class EventController extends Controller
             'location' => $request->location,
             'description' => $request->description,
             'price' => $request->price,
-            'organizer' => $request->organizer,
             'quota' => $request->quota,
             'image' => $path
         ]);
@@ -194,6 +164,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        //
         $event->delete();
 
         return redirect()->back()->with([
