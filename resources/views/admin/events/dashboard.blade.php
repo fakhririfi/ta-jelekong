@@ -3,8 +3,23 @@
 @section('main-content')
 
 <!-- Page Heading -->
-<h1 class="mb-2 text-gray-800">{{ __('Dashboard') }}</h1>
-<h3 class="mb-4 text-gray-600">Dashboard Event untuk tahun {{ date('Y') }}</h3>
+<h1 class="mb-2 text-gray-800"><b>{{ __('Dashboard') }}</b></h1>
+<div class="row">
+    <div class="col-sm-6">
+        <h4 class="mb-4 text-gray-600">Dashboard Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h4>
+    </div>
+    <div class="col-sm-6">
+        <form action="" method="get" class="text-right">
+            <select name="year" class="form-control w-50 d-inline">
+                <option value="2021" {{ Request::get('year') == '2021' ? 'selected' : '' }}>2021</option>
+                <option value="2022" {{ Request::get('year') == '2022' ? 'selected' : '' }}>2022</option>
+                <option value="2023" {{ Request::get('year') == '2023' ? 'selected' : '' }}>2023</option>
+                <option value="2024" {{ Request::get('year') == '2024' ? 'selected' : '' }}>2024</option>
+            </select>
+            <button class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+</div>
 
 @if (session('success'))
 <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
@@ -23,9 +38,9 @@
 
 <div class="row">
     <div class="col-sm-4">
-        <div class="card shadow mb-4">
+        <div class="card2 shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Total Event</h6>
+                <h6 class="m-0 font-weight-bold text-primary2">Total Event</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
@@ -35,9 +50,9 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="card shadow mb-4">
+        <div class="card2 shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Penyelenggara</h6>
+                <h6 class="m-0 font-weight-bold text-primary2">Penyelenggara</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
@@ -47,9 +62,9 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="card shadow mb-4">
+        <div class="card2 shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Kategori</h6>
+                <h6 class="m-0 font-weight-bold text-primary2">Kategori</h6>
             </div>
             <div class="card-body">
                 <div class="chart-area">
@@ -254,7 +269,7 @@
                 labels: categories,
                 datasets: [{
                     data: categoryData,
-                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#5b5b5b','#e8e065'],
                     hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
                 }],
@@ -270,9 +285,6 @@
                     yPadding: 15,
                     displayColors: false,
                     caretPadding: 10,
-                },
-                legend: {
-                    display: false
                 },
                 cutoutPercentage: 80,
             },

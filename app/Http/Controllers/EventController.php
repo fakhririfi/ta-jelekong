@@ -26,6 +26,13 @@ class EventController extends Controller
             return response()->json($data);
         }
         $events = Event::where('schedule', false)->get();
+        $events = [];
+        if ($request->query('year') != null) {
+            $events = Event::whereYear('time', $request->query('year'))
+                ->get();
+        } else {
+            $events = Event::all();
+        }
 
         return view('admin.events.index')->with([
             'events' => $events
@@ -54,7 +61,7 @@ class EventController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
 
         //month count
@@ -62,6 +69,12 @@ class EventController extends Controller
 
         $countData = [];
         $year = Carbon::now()->year;
+<<<<<<< HEAD
+=======
+        if ($request->query('year') != null) {
+            $year = $request->query('year');
+        }
+>>>>>>> madedarmawijaya
         foreach ($months as $month) {
             $event = Event::whereMonth('time', $month)
                 ->whereYear('time', $year)
@@ -72,6 +85,10 @@ class EventController extends Controller
         //organizer count
         $events = Event::select('organizer', DB::raw('count(*) as total'))
             ->groupBy('organizer')
+<<<<<<< HEAD
+=======
+            ->whereYear('time', $year)
+>>>>>>> madedarmawijaya
             ->get();
 
         $organizer = [];
@@ -82,10 +99,16 @@ class EventController extends Controller
         }
 
         //category
-        $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran'];
+        $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran','Webinar','Seminar'];
         $categoryData = [];
         foreach ($categories as $category) {
+<<<<<<< HEAD
             $event = Event::where('category', $category)->count();
+=======
+            $event = Event::where('category', $category)
+                ->whereYear('time', $year)
+                ->count();
+>>>>>>> madedarmawijaya
             array_push($categoryData, $event);
         }
 
@@ -127,7 +150,8 @@ class EventController extends Controller
             'contact_person' => 'required',
             'quota' => 'required',
             'image' => 'required',
-            'organizer' => 'required'
+            'organizer' => 'required',
+            'type' => 'required'
         ]);
 
         $path = $request->file('image')->store('events', 'public');
@@ -143,7 +167,11 @@ class EventController extends Controller
             'quota' => $request->quota,
             'organizer' => $request->organizer,
             'image' => $path,
+<<<<<<< HEAD
             'user_id' =>  $request->user()->id
+=======
+            'type' => $request->type
+>>>>>>> madedarmawijaya
         ]);
 
         if ($event) {
@@ -224,6 +252,7 @@ class EventController extends Controller
             'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
+            'type' => 'required'
         ]);
 
         $path = $event->image;
@@ -241,7 +270,8 @@ class EventController extends Controller
             'contact_person' => $request->contact_person,
             'organizer' => $request->organizer,
             'quota' => $request->quota,
-            'image' => $path
+            'image' => $path,
+            'type' => $request->type
         ]);
 
         if ($event) {

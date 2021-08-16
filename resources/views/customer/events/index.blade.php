@@ -2,15 +2,17 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('List event') }}</h1>
+<h1 class="h3 mb-4 text-gray-800"><b>{{ __('List event') }}</b></h1>
 
 <!-- Main Content goes here -->
+
+
 
 <div class="container-fluid">
 
     <div class="row p-3 mb-3">
         <div class="col-12">
-            <h2 class="font-weight-bold text-primary mb-4">Filter Acara</h2>
+            <h2 class="font-weight-bold text-primary mb-4">Filter Event</h2>
         </div>
         <div class="col-12 mb-3">
             <form action="" method="get">
@@ -34,14 +36,14 @@
         <div class="owl-carousel col-12">
             @foreach($filtered_events as $event)
 
-            <div class="card" style="width: 23rem;">
+            <div class="card3" style="width: 23rem;">
                 <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
                     <div class="overflow-hidden" style="height: 200px;">
                         <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
                     </div>
                     <div class="card-body">
                         <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
+                        <h5 class="font-weight-normal">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
                     </div>
                 </a>
             </div>
@@ -57,14 +59,14 @@
         <div class="owl-carousel col-12">
             @foreach($current_events as $event)
 
-            <div class="card" style="width: 23rem;">
+            <div class="card3" style="width: 23rem;">
                 <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
                     <div class="overflow-hidden" style="height: 200px;">
                         <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
                     </div>
                     <div class="card-body">
                         <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
+                        <h5 class="font-weight-normal">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
                     </div>
                 </a>
             </div>
@@ -80,14 +82,14 @@
         <div class="owl-carousel col-12">
             @foreach($future_events as $event)
 
-            <div class="card" style="width: 23rem;">
+            <div class="card3" style="width: 23rem;">
                 <a href="{{ route('customer.events.show', $event->id) }}" class="text-decoration-none">
                     <div class="overflow-hidden" style="height: 200px;">
                         <img class="card-img-top h-100" src="{{ Storage::url($event->image) }}" alt="Card image cap" style="object-fit: cover;">
                     </div>
                     <div class="card-body">
                         <h3 class="font-weight-bold text-primary">{{ $event->name }}</h3>
-                        <h5 class="font-weight-bold text-primary">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
+                        <h5 class="font-weight-normal">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h5>
                     </div>
                 </a>
             </div>

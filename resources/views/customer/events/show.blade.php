@@ -2,19 +2,24 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Acara Yang Tersedia</h1>
+<h1 class="h3 mb-4 text-gray-800"><b>Acara Yang Tersedia</b></h1>
 
 <!-- Main Content goes here -->
 
 <div class="container-fluid">
     <div class="row p-3 mb-3">
         <div class="col-sm-6 overflow-hidden" style="height: 400px;">
-            <img src="{{ Storage::url($event->image) }}" class="w-100" style="object-fit: cover;">
+            <img src="{{ Storage::url($event->image) }}" class="foto w-100 foto" style="object-fit: cover;">
         </div>
         <div class="col-sm-6" style="text-align: justify;">
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
-            <h4 class="font-weight-bold">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h4>
+            <h4 class="font-weight-normal">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h4>
             <table class="table table-borderless">
+            <tr>
+                    <td>Tipe Acara</td>
+                    <td>:</td>
+                    <td>{{ $event->type }}</td>
+                </tr>
                 <tr>
                     <td>Penyelenggara</td>
                     <td>:</td>

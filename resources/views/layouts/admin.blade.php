@@ -26,7 +26,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class=""></i>
             </div>
             <div class="sidebar-brand-text mx-3">Jelekong</div>
         </a>
@@ -36,7 +36,7 @@
         @if(Auth::check())
         <li class="nav-item {{ Nav::isRoute('events.*') }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-list"></i>
+            <i class="fa fa-bars" aria-hidden="true"></i>
                 <span>Events</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -68,7 +68,7 @@
         @else
         <li class="nav-item {{ Nav::isRoute('events.*') }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-list"></i>
+            <i class="fa fa-bars" aria-hidden="true"></i>
                 <span>Events</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">

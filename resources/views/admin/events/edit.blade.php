@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('Edit Event') }}</h1>
+<h1 class="h3 mb-4 text-gray-800"><b>{{ __('Edit Event') }}</b></h1>
 
 <!-- Main Content goes here -->
 
@@ -39,6 +39,17 @@
                 <option value="Pentas Musik" {{ $event->category == 'Pentas Musik' ? 'selected' : '' }}>Pentas Musik</option>
                 <option value="Teater" {{ $event->category == 'Teater' ? 'selected' : '' }}>Teater</option>
                 <option value="Pameran" {{ $event->category == 'Pameran' ? 'selected' : '' }}>Pameran</option>
+                <option value="Webinar" {{ $event->category == 'Webinar' ? 'selected' : '' }}>Webinar</option>
+                <option value="Webinar" {{ $event->category == 'Seminar' ? 'selected' : '' }}>Seminar</option>
+            </select>
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Tipe Acara</label>
+        <div class="col-sm-10">
+            <select name="type" class="form-control">
+                <option value="offline" {{ $event->type == 'offline' ? 'selected' : '' }}>offline</option>
+                <option value="online" {{ $event->type == 'online' ? 'selected' : '' }}>online</option>
             </select>
         </div>
     </div>

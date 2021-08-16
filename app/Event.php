@@ -24,6 +24,7 @@ class Event extends Model
         'category',
         'contact_person',
         'user_id',
-        'schedule'
+        'schedule',
+        'type'
     ];
 }
