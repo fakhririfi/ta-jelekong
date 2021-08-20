@@ -130,4 +130,4 @@
         $(".owl-carousel").owlCarousel();
     });
 </script>
-@endpush 
+@endpush
