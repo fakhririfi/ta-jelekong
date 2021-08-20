@@ -8,10 +8,8 @@
 
 <div class="container-fluid">
     @foreach($events as $event)
-    <div class="row bg-primary text-white p-3">
     <div class="row bg-primary text-white p-3 mb-3">
         <div class="col-10">
-            <h3 class="mb-0">Name</h3>
             <h3 class="mb-0">{{ $event->name }}</h3>
         </div>
         <div class="col-1">
@@ -23,7 +21,6 @@
             <form action="{{ route('events.destroy', $event->id) }}" method="post">
                 @csrf
                 @method('delete')
-                <button class="btn btn-primary">
                 <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary">
                     <i class="fa fa-lg fa-trash"></i>
                 </button>
@@ -51,4 +48,4 @@
     {{ session('status') }}
 </div>
 @endif
-@endpush 
+@endpush

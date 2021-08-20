@@ -95,12 +95,14 @@
                 <span>{{ __('Profile') }}</span>
             </a>
         </li>
+
         <li class="nav-item {{ Nav::isRoute('about') }}">
             <a class="nav-link" href="{{ route('about') }}">
                 <i class="fas fa-fw fa-hands-helping"></i>
                 <span>{{ __('About') }}</span>
             </a>
         </li>
+
         <li class="nav-item {{ Nav::isRoute('blank') }}">
             <a class="nav-link" href="{{ route('blank') }}">
                 <i class="fas fa-fw fa-book"></i>

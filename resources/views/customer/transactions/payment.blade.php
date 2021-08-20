@@ -35,10 +35,6 @@
                         <td>Jumlah Tiket</td>
                         <td>{{ $transaction->ticket }} Tiket</td>
                     </tr>
-                    <tr>
-                        <td>Kategori</td>
-                        <td>{{ $transaction->event->category }}</td>
-                    </tr>
                 </table>
             </div>
             <div class="mb-3 p-3 bg-white">
@@ -139,24 +135,33 @@
         $(this).siblings(".custom-file-label").css("white-space", "nowrap");
         $(this).siblings(".custom-file-label").css("text-overflow", "ellipsis");
     });
+
     // Set the date we're counting down to
-    var countDownDate = new Date("{{ Carbon\Carbon::parse($transaction->updated_at)->addHour(2) }}").getTime();
+    var countDownDate = new Date("{{ Carbon\Carbon::parse($transaction->updated_at)->addMinute(5) }}").getTime();
+
     // Update the count down every 1 second
     var x = setInterval(function() {
+
         // Get today's date and time
         var now = new Date().getTime();
+
         // Find the distance between now and the count down date
         var distance = countDownDate - now;
+
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
         // Display the result in the element with id="demo"
         document.getElementById("jam").innerHTML = `${hours} Jam : ${minutes} Menit : ${seconds} Detik`;
+
         // If the count down is finished, write some text
         if (distance < 0) {
             clearInterval(x);
+            alert('Waktu anda sudah habis, pembayaran anda dibatalkan');
+            location.href = "{{ route('customer.transactions.payment.cancel', $transaction->code) }}";
             document.getElementById("jam").innerHTML = "EXPIRED";
         }
     }, 1000);

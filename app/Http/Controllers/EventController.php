@@ -16,7 +16,6 @@ class EventController extends Controller
      */
     public function index()
     {
-        
         $events = Event::all();
 
         return view('admin.events.index')->with([
@@ -39,15 +38,14 @@ class EventController extends Controller
             'future_events' => $future_events,
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
-    
     {
-        //
         return view('admin.events.create');
     }
 
@@ -59,7 +57,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
         $this->validate($request, [
             'name' => 'required',
             'time' => 'required',
@@ -68,6 +66,7 @@ class EventController extends Controller
             'price' => 'required',
             'quota' => 'required',
             'image' => 'required',
+            'organizer' => 'required'
         ]);
 
         $path = $request->file('image')->store('events', 'public');
@@ -79,6 +78,7 @@ class EventController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'quota' => $request->quota,
+            'organizer' => $request->organizer,
             'image' => $path
         ]);
 
@@ -105,6 +105,22 @@ class EventController extends Controller
     }
 
     /**
+     * Display the specified resource for customer.
+     *
+     * @param  \App\Event  $event
+     * @return \Illuminate\Http\Response
+     */
+    public function show_customer($id)
+    {
+
+        $event = Event::find($id);
+
+        return view('customer.events.show')->with([
+            'event' => $event
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Event  $event
@@ -112,7 +128,6 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
         if(!$event){
             return redirect()->back()->withErrors([
                 'events' => 'data tidak ditemukan'
@@ -133,17 +148,16 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
 
         $this->validate($request, [
             'name' => 'required',
             'time' => 'required',
             'location' => 'required',
             'description' => 'required',
+            'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
         ]);
-
 
         $path = $event->image;
         if(isset($request->image)){
@@ -156,6 +170,7 @@ class EventController extends Controller
             'location' => $request->location,
             'description' => $request->description,
             'price' => $request->price,
+            'organizer' => $request->organizer,
             'quota' => $request->quota,
             'image' => $path
         ]);
@@ -179,7 +194,6 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
         $event->delete();
 
         return redirect()->back()->with([

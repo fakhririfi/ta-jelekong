@@ -44,6 +44,12 @@
         </div>
     </div>
     <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Penyelenggara</label>
+        <div class="col-sm-10">
+            <input name="organizer" value="{{ $event->organizer }}" type="text" class="form-control">
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Harga Tiket</label>
         <div class="col-sm-10">
             <input name="price" value="{{ $event->price }}" type="number" class="form-control">
@@ -88,17 +94,14 @@
 @endpush
 
 @push('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="{{ asset('datetimepicker/jquery.datetimepicker.min.css') }}">
 @endpush
 
 @push('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script src="{{ asset('datetimepicker/jquery.datetimepicker.full.min.js') }}"></script> 
 <script>
     $(function() {
-        $('.datepicker').datetimepicker({
-            'format': 'YYYY-MM-DD HH:ss'
-        });
+        $('.datepicker').datetimepicker();
     });
 </script>
 @endpush
