@@ -31,4 +31,9 @@ class Event extends Model
     {
         return $this->hasMany(Tahap::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'event_id');
+    }
 }
