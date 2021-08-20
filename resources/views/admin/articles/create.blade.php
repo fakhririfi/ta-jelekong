@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('Buat Article') }}</h1>
+<h1 class="h3 mb-4 text-gray-800"><b>{{ __('Buat Article') }}</b></h1>
 
 <!-- Main Content goes here -->
 
@@ -21,7 +21,7 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Judul Article</label>
         <div class="col-sm-10">
-            <input name="title" type="text" class="form-control">
+            <input name="title" type="text" class="form-control" placeholder="Masukkan judul artikel">
         </div>
     </div>
     <div class="mb-3 row">
@@ -38,19 +38,19 @@
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Waktu Upload</label>
         <div class="col-sm-10">
-            <input name="time" type="text" class="form-control datepicker">
+            <input name="time" type="text" class="form-control datepicker" placeholder="Masukkan waktu">
         </div>
     </div>
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Content</label>
         <div class="col-sm-10">
-            <textarea name="content" class="form-control ckeditor"></textarea>
+            <textarea name="content" class="form-control ckeditor" placeholder="Masukkan isi konten"></textarea>
         </div>
     </div>
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Upload</label>
         <div class="col-sm-10">
-            <input name="image" type="file" class="form-control-plaintext">
+            <input name="image" type="file" class="form-control-plaintext" placeholder="Masukkan foto acara">
         </div>
     </div>
     <div class="mb-3 row">

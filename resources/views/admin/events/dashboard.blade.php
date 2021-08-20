@@ -36,7 +36,7 @@
 </div>
 @endif
 
-<div class="row">
+<div class="row1">
     <div class="col-sm-4">
         <div class="card2 shadow mb-4">
             <div class="card-header py-3">

@@ -65,6 +65,19 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item {{ Nav::isRoute('transactions.*') }}">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ticketingCollapse" aria-expanded="true" aria-controls="ticketingCollapse">
+                        <i class="fas fa-fw fa-search"></i>
+                        <span>Ticketing</span>
+                    </a>
+                    <div id="ticketingCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('transactions.dashboard') }}">Dashboard Ticket</a>
+                            <a class="collapse-item" href="{{ route('customer.transactions.ticketing') }}">Cari Ticket</a>
+                            <a class="collapse-item" href="{{ route('transactions.index') }}">List Ticket</a>
+                        </div>
+                    </div>
+                </li>
             <li class="nav-item {{ request()->routeIs('schedule.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('schedule.index') }}">
                     <i class="fas fa-fw fa-calendar"></i>

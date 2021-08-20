@@ -12,12 +12,12 @@
         </div>
     @endif
 
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Manage Event') }} - {{ $event->name }}</h1>
+    <h1 class="h3 mb-4 text-gray-800"><b>{{ __('Manage Event') }} - {{ $event->name }}</b></h1>
 
     <!-- Main Content goes here -->
     <div id="task" class="d-flex flex-row flex-nowrap overflow-auto">
         <div class="col-md-3" style="min-width: 300px">
-            <div class="card">
+            <div class="card5">
                 <div class="card-header">
                     <h5 class="mb-1">{{ $event->name }}</h5>
                 </div>
@@ -92,7 +92,7 @@
 
         @foreach ($event->tahaps as $tahap)
             <div class="col-md-3" style="min-width: 300px">
-                <div class="card">
+                <div class="card5">
                     <div class="card-header">
                         <div class="row">
                             <div class="col">
@@ -170,7 +170,7 @@
                 @csrf
                 <input type="hidden" name="event_id" value="{{ $event->id }}">
 
-                <div class="card">
+                <div class="card5">
                     <div class="card-header">
                         <input type="text" name="nama" class="form-control" placeholder="Nama Event">
                     </div>
