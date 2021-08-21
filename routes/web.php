@@ -48,3 +48,4 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('articles', ArticleController::class);
     });
 });
+Route::post('/shareCounter/{article}', 'ArticleController@shareCounter');

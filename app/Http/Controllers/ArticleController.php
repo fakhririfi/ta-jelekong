@@ -20,7 +20,6 @@ class ArticleController extends Controller
         $events = Event::all();
 
         return view('admin.articles.index')->with([
-
             'articles' => $articles,
             'events' => $events
         ]);
@@ -30,7 +29,7 @@ class ArticleController extends Controller
     public function index_customer()
     {
         $articles = Article::whereDate('post_date', '<=', Carbon::now())
-        ->get();
+                            ->get();
 
         return view('customer.articles.index')->with([
             'articles' => $articles
@@ -80,7 +79,6 @@ class ArticleController extends Controller
             'image' => $path,
             'event_id' => $event_id,
             'post_date' => Carbon::parse($request->time)
-            
         ]);
 
         if ($article) {
@@ -120,7 +118,7 @@ class ArticleController extends Controller
             $event = Event::find($article->event_id);
         }
 
-        $article-> increment('visitor');
+        $article->increment('visitor');
 
         return view('customer.articles.show')->with([
             'article' => $article,
@@ -146,7 +144,6 @@ class ArticleController extends Controller
 
         return view('admin.articles.edit')->with([
             'article' => $article,
-            'article' => $article,
             'events' => $events
         ]);
     }
@@ -163,7 +160,7 @@ class ArticleController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'content' => 'required',
-             'time' => 'required'
+            'time' => 'required'
         ]);
 
         $path = $article->image;
@@ -182,7 +179,6 @@ class ArticleController extends Controller
             'image' => $path,
             'event_id' => $event_id,
             'post_date' => Carbon::parse($request->time)
-        
         ]);
 
         if ($article) {
@@ -209,5 +205,14 @@ class ArticleController extends Controller
         return redirect()->back()->with([
             'success' => "Berhasil Menghapus $article->title"
         ]);
+    }
+
+    public function shareCounter(Article $article)
+    {
+        $article->increment('share_count');
+
+        return [
+			'status' => true
+		];
     }
 }
