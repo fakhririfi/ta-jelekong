@@ -14,11 +14,26 @@ class Event extends Model
     protected $fillable = [
         'name',
         'time',
+        'end',
         'location',
         'description',
         'price',
         'quota',
         'image',
-        'organizer'
+        'organizer',
+        'category',
+        'contact_person',
+        'user_id',
+        'schedule',
+        'type'
     ];
+    public function tahaps()
+    {
+        return $this->hasMany(Tahap::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'event_id');
+    }
 }

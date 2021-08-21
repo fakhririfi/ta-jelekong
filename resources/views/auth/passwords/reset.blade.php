@@ -30,11 +30,21 @@
                                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="email" placeholder="{{ __('E-Mail Address') }}" value="{{ $email ?? old('email') }}" required autofocus>
+                                        <input type="email" class="form-control form-control-user" @error('email') is-invalid @enderror name="email" placeholder="{{ __('E-Mail Address') }}" value="{{ $email ?? old('email') }}" required autofocus>
+                                        @error('email')
+                                            <span class="invalid-feedback is-invalid" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password" placeholder="{{ __('Password') }}" required>
+                                        <input type="password" class="form-control form-control-user" @error('password') is-invalid @enderror name="password" placeholder="{{ __('Password') }}" required>
+                                        @error('password')
+                                            <span class="invalid-feedback is-invalid" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

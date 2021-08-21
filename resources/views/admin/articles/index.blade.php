@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('List Article') }}</h1>
+<h1 class="h3 mb-4 text-gray-800"><b>{{ __('List Article') }}</b></h1>
 
 <!-- Main Content goes here -->
 
@@ -13,6 +13,7 @@
 
         @foreach($articles as $article)
     <div class="row bg-primary text-white p-3 mb-3">
+
         <div class="col-10">
             <h3 class="mb-0">{{ $article->title }}</h3>
         </div>
