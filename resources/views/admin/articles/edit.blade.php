@@ -26,6 +26,12 @@
         </div>
     </div>
     <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Total Pengunjung</label>
+        <div class="col-sm-10">
+            <input name="visitor" value="{{ $article->visitor }}" type="text" class="form-control" readonly>
+        </div>
+    </div>
+    <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Event</label>
         <div class="col-sm-10">
             <select name="event_id" class="form-control">
