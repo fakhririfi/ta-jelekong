@@ -12,7 +12,7 @@
         <div class="col-sm-8">
 
         @foreach($articles as $article)
-    <div class="row bg-primary text-white p-3 mb-3">
+    <div class="row bg-primary2 text-white p-3 mb-3">
 
         <div class="col-10">
             <h3 class="mb-0">{{ $article->title }}</h3>
@@ -26,7 +26,7 @@
             <form action="{{ route('articles.destroy', $article->id) }}" method="post">
                 @csrf
                 @method('delete')
-                <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary">
+                <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary2">
                     <i class="fa fa-lg fa-trash"></i>
                 </button>
             </form>
@@ -36,7 +36,8 @@
     @endforeach
     </div>
         <div class="col-sm-4">
-            <h6 class="font-weight-bold">Data Event dan Article</h6>
+            <h5 class="font-weight-bold">Data Event dan Article</h5>
+            <hr>
             <table class="table table-bordered bg-white">
                 <tr>
                     <th>Event</th>
