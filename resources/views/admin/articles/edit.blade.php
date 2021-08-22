@@ -103,6 +103,8 @@
 <script>
     ClassicEditor
         .create(document.querySelector('.ckeditor'))
+        toolbar: ['bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList']
+        })
         .catch(error => {
             console.error(error);
         });

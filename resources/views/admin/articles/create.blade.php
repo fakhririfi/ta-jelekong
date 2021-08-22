@@ -86,7 +86,9 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 <script>
     ClassicEditor
-        .create(document.querySelector('.ckeditor'))
+        .create(document.querySelector('.ckeditor'), {
+            toolbar: ['bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList']
+        })
         .catch(error => {
             console.error(error);
         });
