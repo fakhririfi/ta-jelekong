@@ -14,7 +14,7 @@ class AddTypeToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('type')->after('contact_person');
+            $table->string('type')->nullable()->after('contact_person');
         });
     }
 
