@@ -8,18 +8,18 @@
     <div class="row p-3 mb-3">
         <div class="col-sm-12">
             <h1 class="font-weight-bold">{{ $article->title }}</h1>
-            <p class="small">{{ date('D d-m-Y H:s', strtotime($article->created_at)) }}</p>
+            <p class="small">{{ date('D d-m-Y H:s', strtotime($article->created_at)) }} | {{ $article->share_count }} kali dibagikan</p>
         </div>
         <div class="col-sm-12">
             <img src="{{ Storage::url($article->image) }}" class="w-100">
         </div>
         <div class="col-sm-12 my-3">
             <h4>Share On:</h4>
-            <div class="sharethis-inline-share-buttons text-left"></div>
+            <div class="sharethis-inline-share-buttons text-left" id="shareButton"></div>
         </div>
         @if($event != null)
         <div class="col-sm-12 p-3 bg-white">
-            <p>Detail event nya dapat di lihat di : <a href="{{ route('customer.events.show', $event->id) }}">{{ route('customer.events.show', $event->id) }}</a></p>
+            <p>Detail event nya dapat di lihat di : <a href="{{ route('customer.articles.show', $event->id) }}">{{ route('customer.articles.show', $event->id) }}</a></p>
         </div>
         @endif
         <div class="col-sm-12 p-3 bg-white">
@@ -50,4 +50,26 @@
 
 @push('js')
 <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=60e93c47d2455f00191cee31&product=inline-share-buttons" async="async"></script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $('#shareButton').on('click', function() {
+
+        var article_id = <?= $article->id ?>
+
+        $.ajax({
+            url: `/shareCounter/${article_id}`,
+            method: 'POST',
+            success: function(result) {
+                if (result.status) {
+                    console.log("berhasil")
+                }
+            }
+        });
+    });
+</script>
 @endpush

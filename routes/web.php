@@ -92,3 +92,4 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::resource('transactions', TransactionController::class);
     });
 });
+Route::post('/shareCounter/{article}', 'ArticleController@shareCounter');

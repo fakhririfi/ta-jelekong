@@ -124,6 +124,7 @@
             </a>
          </li>
 
+        </li>
                 <li class="nav-item {{ Nav::isRoute('articles.*') }}">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticle"
                         aria-expanded="true" aria-controls="collapseArticle">

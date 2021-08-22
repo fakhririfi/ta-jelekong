@@ -16,7 +16,8 @@ class Article extends Model
         'content',
         'image',
         'event_id',
-        'post_date'
+        'post_date',
+        'share_count'
     ];
 
 }
