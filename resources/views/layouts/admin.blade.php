@@ -110,6 +110,12 @@
                         </div>
                     </div>
                 </li>
+                <li class="nav-item {{ Nav::isRoute('transactions.*') }}">
+            <a class="nav-link" href="{{ route('customer.transactions.ticketing') }}">
+                <i class="fas fa-fw fa-search"></i>
+                <span>Ticketing</span>
+            </a>
+        </li>
                 <li class="nav-item {{ Nav::isRoute('articles.*') }}">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticle"
                         aria-expanded="true" aria-controls="collapseArticle">
