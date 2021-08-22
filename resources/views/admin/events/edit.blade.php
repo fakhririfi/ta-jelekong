@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800"><b>{{ __('Edit Event') }}</b></h1>
+
 
 <!-- Main Content goes here -->
 
@@ -16,6 +16,8 @@
 </div>
 @endif
 
+<div class="card10 bg-white p-5">
+<h1 class="h3 mb-4 text-gray-800"><b>{{ __('Edit Event') }}</b></h1>
 <form action="{{ route('events.update', $event->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')

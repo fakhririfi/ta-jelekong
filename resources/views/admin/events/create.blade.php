@@ -17,8 +17,7 @@
 @endif
 <div class="card10 bg-white p-5">
     
-<h3 class="h3 mb-4 text-gray-800" style="background-color: #e6e6e6;width: 15%;border-radius: 50px;padding: 0.5rem;"><b>{{ __('Buat Event') }}</b></h3>
-
+<h1 class="h3 mb-4 text-gray-800"><b>{{ __('Buat Event') }}</b></h1>
        
 
 <form action="{{ route('events.store') }}" method="post" enctype="multipart/form-data">
