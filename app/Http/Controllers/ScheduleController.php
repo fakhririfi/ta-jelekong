@@ -16,13 +16,6 @@ class ScheduleController extends Controller
      */
     public function index(Request $request)
     {
-
-        // if ($request->ajax()) {
-        //     $data = Schedule::all();
-
-        //     return response()->json($data);
-        // }
-
         return view('schedule');
     }
 
@@ -56,6 +49,17 @@ class ScheduleController extends Controller
             'organizer'         => 'required'
         ]);
 
+        $array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"), true);
+        if (isset($array[Carbon::parse($request->time)->format('Ymd')])) {
+            return redirect()->back()->withErrors([
+                'error' => 'Tangal merah'
+            ]);
+        }
+        if (isset($array[Carbon::parse($request->end)->format('Ymd')])) {
+            return redirect()->back()->withErrors([
+                'error' => 'Tangal merah'
+            ]);
+        }
 
         $event = Event::create([
             'name'              => $request->name,
@@ -132,6 +136,17 @@ class ScheduleController extends Controller
             'organizer'         => 'required'
         ]);
 
+        $array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"), true);
+        if (isset($array[Carbon::parse($request->time)->format('Ymd')])) {
+            return redirect()->back()->withErrors([
+                'error' => 'Tangal merah'
+            ]);
+        }
+        if (isset($array[Carbon::parse($request->end)->format('Ymd')])) {
+            return redirect()->back()->withErrors([
+                'error' => 'Tangal merah'
+            ]);
+        }
 
         $event->update([
             'name'              => $request->name,
