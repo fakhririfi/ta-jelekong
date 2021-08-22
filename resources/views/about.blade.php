@@ -2,16 +2,16 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('About') }}</h1>
+
 
 <div class="row justify-content-center">
 
     <div class="col-lg-8">
-
-        <div class="card shadow mb-4">
-
+   
+        <div class="card8 shadow mb-4">
+ <h1 class="h3 mb-4 text-gray-800" style="padding: 1.5rem;"><b>{{ __('About') }}</b></h1>
             <div class="card-profile-image mt-4">
-                <img src="{{ asset('img/favicon.png') }}" class="rounded-circle" alt="user-image">
+            <img class="rounded-circle" src="" alt="">
             </div>
 
             <div class="card-body">
@@ -38,8 +38,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h5 class="font-weight-bold">Event Desa Jelengkong</h5>
-                        <p>Jelekong memiliki acara yang bervariasi dengan beberapa kategori diantaranya Tari, Pentas Musik, Teater, Pameran. Berikut contoh videonya</p>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/N0OcmP1Ow9M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <p>Jelekong memiliki acara yang bervariasi dengan beberapa kategori diantaranya Tari, Pentas Musik, Teater, Pameran. Berikut contoh videonya</p></center>
+                       <center> <iframe width="560" height="315" src="https://www.youtube.com/embed/N0OcmP1Ow9M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/J-M9HxskRgA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>

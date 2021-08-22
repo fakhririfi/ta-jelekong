@@ -11,7 +11,7 @@
         @foreach($articles as $article)
         <div class="col-sm-6 mb-4">
             <div class="card">
-                <div class="card-body bg-primary">
+                <div class="card-body2">
                     <h5 class="card-title text-white font-weight-bold">{{ $article->title }}</h5>
                     <p class="small text-white">{{ date('D d-m-Y H:s', strtotime($article->created_at)) }}</p>
                     <a href="{{ route('customer.articles.show', $article->id) }}" class="btn btn-outline-light">Lihat</a>
