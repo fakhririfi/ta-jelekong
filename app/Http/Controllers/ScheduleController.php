@@ -52,12 +52,12 @@ class ScheduleController extends Controller
         $array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"), true);
         if (isset($array[Carbon::parse($request->time)->format('Ymd')])) {
             return redirect()->back()->withErrors([
-                'error' => 'Tangal merah'
+                'error' => 'Tanggal Merah'
             ]);
         }
         if (isset($array[Carbon::parse($request->end)->format('Ymd')])) {
             return redirect()->back()->withErrors([
-                'error' => 'Tangal merah'
+                'error' => 'Tanggal Merah'
             ]);
         }
 
@@ -139,12 +139,12 @@ class ScheduleController extends Controller
         $array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"), true);
         if (isset($array[Carbon::parse($request->time)->format('Ymd')])) {
             return redirect()->back()->withErrors([
-                'error' => 'Tangal merah'
+                'error' => 'Tanggal Merah'
             ]);
         }
         if (isset($array[Carbon::parse($request->end)->format('Ymd')])) {
             return redirect()->back()->withErrors([
-                'error' => 'Tangal merah'
+                'error' => 'Tanggal Merah'
             ]);
         }
 
