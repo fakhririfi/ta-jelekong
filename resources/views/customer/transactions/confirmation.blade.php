@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Konfirmasi Pemesanan</h1>
+<h1 class="h3 mb-4 text-gray-800"><b>Konfirmasi Pemesanan</b></h1>
 
 <!-- Main Content goes here -->
 
@@ -16,8 +16,14 @@
                 <img src="{{ Storage::url($event->image) }}" class="w-100" style="object-fit: cover;">
             </div>
             <div class="col-sm-4">
-                <h3 class="font-weight-bold">{{ $event->name }}</h3>
-                <h3 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($event->time)) }}</h3>
+                <p>
+            <h4 class="font-weight-bold">Nama Event : </h4>
+                <h3>{{ $event->name }}</h3>
+            </p>
+<p>
+<h4 class="font-weight-bold">Waktu : </h4>
+                {{ date('D d-m-Y H:s', strtotime($event->time)) }}
+</p>
                 <p>
                     <span class="font-weight-bold">Harga Tiket: </span>
                     Rp. {{ number_format($event->price, 0, ',', '.') }}
@@ -42,7 +48,7 @@
     <div class="row p-3 mb-3 justify-content-center bg-white">
         <div class="col-sm-12 mb-5">
             <h1 class="text-center font-weight-bold">Detail Pemesanan</h1>
-            <h1 class="text-center font-weight-bold">Mohon Konfirmasi Data Anda</h1>
+            <h3 class="text-center font-weight">Mohon Konfirmasi Data Anda</h3>
         </div>
         @if ($errors->any())
         <div class="alert alert-danger border-left-danger" role="alert">
@@ -59,7 +65,14 @@
             <div class="col-sm-4">
                 <div class="mb-3">
                     <label for="" class="form-label">Titel</label>
-                    <input type="text" name="title" class="form-control">
+                
+                <select name="title" class="form-control">
+                <option selected="true" value="" disabled="disabled">Pilih Titel</option>
+                <option value="Tari">Mr</option>
+                <option value="Pentas Musik">Mrs</option>
+                <option value="Teater">Lain-lain</option>
+            </select>
+
                 </div>
             </div>
             <div class="col-sm-4">

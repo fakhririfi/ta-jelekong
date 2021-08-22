@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Checkout</h1>
+<h1 class="h3 "><b>Checkout</b></h1>
 
 <!-- Main Content goes here -->
 
@@ -59,10 +59,11 @@
                 </table>
             </div>
             <div class="mb-3 p-3 bg-white">
-                <p>Informasi Penting:</p>
+                <h6><b>Informasi Penting:</b></h6>
                 <ol>
                     <li>Hanya berlaku dengan melakukan pembayaran dll</li>
-                    <li>Pastikan Nomor sudah sesuai</li>
+                    <li>Pastikan anda mencatat order id yang dipesan</li>
+                    <li>Pastikan Informasi data diri sudah sesuai</li>
                     <li>Pastikan kembali nominal sudah sesuai</li>
                 </ol>
             </div>
@@ -72,7 +73,7 @@
                 <h3>BNI</h3>
             </div>
             <div class="mb-3 p-3 bg-white text-center">
-                <p>Harap diperhatikan, jika anda sudah melakukan konfirmasi pemesanan, maka anda tidak bisa membatalkan nya</p>
+                <p>Harap diperhatikan, jika anda sudah melakukan konfirmasi pemesanan, maka anda tidak bisa dibatalkan</p>
             </div>
             <form action="{{ route('customer.transactions.checkout.process', $transaction->code) }}" method="post" class="text-right">
                 @csrf
@@ -80,12 +81,13 @@
             </form>
         </div>
         <div class="col-sm-3 bg-white m-3 h-100 p-5">
-            <p>Order ID</p>
+            <h6><b>Order ID</b></h6>
             <h1>{{ $transaction->code }}</h1>
             <hr>
             <div class="overflow-hidden" style="height: 100px;">
                 <img src="{{ Storage::url($transaction->event->image) }}" class="w-100" style="object-fit: cover;">
             </div>
+</br>
             <h3 class="font-weight-bold">{{ $transaction->event->name }}</h3>
             <h5 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($transaction->event->time)) }}</h5>
             <p>

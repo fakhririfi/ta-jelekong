@@ -2,13 +2,14 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Cari Tiket</h1>
+
 
 <!-- Main Content goes here -->
 
-<div class="container-fluid">
+<center><div class="container-fluid">
     <div class="row p-3 mb-3 justify-content-left">
         <div class="col-sm-4 m-3 bg-white p-5">
+        <h1 class="h3 mb-4 text-gray-800" style="text-align: left"><b>Cari Tiket</b></h1>
             <p>Cek Pesanan Disini</p>
             @if ($errors->any())
             <div class="alert alert-danger border-left-danger" role="alert">
@@ -31,7 +32,7 @@
             </form>
         </div>
     </div>
-</div>
+</div></center>
 
 <!-- End of Main Content -->
 @endsection

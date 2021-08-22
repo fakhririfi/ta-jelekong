@@ -18,7 +18,7 @@
 
         <div class="col-lg-4 order-lg-2">
 
-            <div class="card shadow mb-4">
+            <div class="card2 shadow mb-4">
                 <div class="card-profile-image mt-4">
                     <figure class="rounded-circle avatar avatar font-weight-bold" style="font-size: 60px; height: 180px; width: 180px;" data-initial="{{ Auth::user()->name[0] }}"></figure>
                 </div>
@@ -38,7 +38,7 @@
 
         <div class="col-lg-8 order-lg-1">
 
-            <div class="card shadow mb-4">
+            <div class="card2 shadow mb-4">
 
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">My Account</h6>
@@ -51,7 +51,7 @@
 
                         <input type="hidden" name="_method" value="PUT">
 
-                        <h6 class="heading-small text-muted mb-4">User information</h6>
+                      
 
                         <div class="pl-lg-4">
                             <div class="row">

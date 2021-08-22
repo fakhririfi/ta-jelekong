@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('List Article') }}</h1>
+<h1 class=""><b>{{ __('List Article') }}</b></h1>
 
 <!-- Main Content goes here -->
 

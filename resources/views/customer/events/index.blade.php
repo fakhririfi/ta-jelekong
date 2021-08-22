@@ -2,7 +2,7 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800"><b>{{ __('List event') }}</b></h1>
+<h1 class=""><b>{{ __('List event') }}</b></h1>
 
 <!-- Main Content goes here -->
 
@@ -12,7 +12,8 @@
 
     <div class="row p-3 mb-3">
         <div class="col-12">
-            <h2 class="font-weight-bold text-primary mb-4">Filter Event</h2>
+            <h3 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 15%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Filter Event</h3>
+
         </div>
         <div class="col-12 mb-3">
             <form action="" method="get">
@@ -51,10 +52,10 @@
             @endforeach
         </div>
     </div>
-
+<hr>
     <div class="row p-3 mb-3">
         <div class="col-12">
-            <h2 class="font-weight-bold text-primary mb-4">Acara Yang Tersedia</h2>
+        <h3 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 25%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Acara Yang Tersedia</h3>
         </div>
         <div class="owl-carousel col-12">
             @foreach($current_events as $event)
@@ -74,10 +75,10 @@
             @endforeach
         </div>
     </div>
-
+<hr>
     <div class="row p-3 mb-3">
         <div class="col-12">
-            <h2 class="font-weight-bold text-primary mb-4">Acara Yang Akan Datang</h2>
+        <h3 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 30%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Acara Yang Akan Datang</h3>
         </div>
         <div class="owl-carousel col-12">
             @foreach($future_events as $event)
@@ -98,6 +99,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- End of Main Content -->
 @endsection
@@ -131,3 +133,4 @@
     });
 </script>
 @endpush
+

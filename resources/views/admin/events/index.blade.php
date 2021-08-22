@@ -1,17 +1,18 @@
 @extends('layouts.admin')
 
 @section('main-content')
-<!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800"><b>{{ __('List event') }}</b></h1>
 
 <!-- Main Content goes here -->
 
 <div class="container-fluid">
+<!-- Page Heading -->
+<h1 class="h3 mb-4 text-gray-800"><b>{{ __('List Event') }}</b></h1>
 
 
-<div class="row">
+        <div class="row">   
         <div class="col-sm-6">
-            <h3 class="mb-4 text-gray-600">List Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h3>
+            
+        <h3 class="mb-4 text-gray-600">List Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h3>
         </div>
         <div class="col-sm-6">
             <form action="" method="get" class="text-right">

@@ -26,6 +26,10 @@
 </head>
 <body id="page-top">
 
+
+</style>
+
+
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
@@ -37,13 +41,16 @@
                 <i class=""></i>
             </div>
             <div class="sidebar-brand-text mx-3">Jelekong</div>
+            
+            
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
-
+        
         <!-- Nav Item - Profile -->
         @if (Auth::check())
+        <div class="ad" justify-content-center>ADMIN</div>
                 <li class="nav-item {{ Nav::isRoute('events.*') }}">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
@@ -110,6 +117,13 @@
                         </div>
                     </div>
                 </li>
+                <li class="nav-item {{ Nav::isRoute('transactions.*') }}">
+            <a class="nav-link" href="{{ route('customer.transactions.ticketing') }}">
+                <i class="fas fa-fw fa-search"></i>
+                <span>Ticketing</span>
+            </a>
+         </li>
+
                 <li class="nav-item {{ Nav::isRoute('articles.*') }}">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticle"
                         aria-expanded="true" aria-controls="collapseArticle">
@@ -224,12 +238,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ __('Ready to Leave?') }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('Apakah anda yakin?') }}</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body">Klik tombol logout untuk keluar.</div>
             <div class="modal-footer">
                 <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
                 <a class="btn btn-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>

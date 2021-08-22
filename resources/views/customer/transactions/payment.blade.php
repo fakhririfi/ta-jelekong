@@ -58,14 +58,15 @@
                 <p>Informasi Penting:</p>
                 <ol>
                     <li>Hanya berlaku dengan melakukan pembayaran dll</li>
-                    <li>Pastikan Nomor sudah sesuai</li>
+                    <li>Pastikan anda mencatat order id yang dipesan</li>
+                    <li>Pastikan Informasi data diri sudah sesuai</li>
                     <li>Pastikan kembali nominal sudah sesuai</li>
                 </ol>
             </div>
             <form action="{{ route('customer.transactions.payment.process', $transaction->code) }}" method="post" enctype="multipart/form-data" class="text-right">
                 @csrf
                 <div class="mb-3 p-3 bg-white text-left">
-                    <p>Countdown Transfer</p>
+                    <p>Batas waktu transfer</p>
                     <h2 class="mb-3 text-center font-weight-bold" id="jam"></h2>
                     <p>Upload Bukti Transfer</p>
                     @if ($errors->any())
@@ -90,12 +91,13 @@
             </form>
         </div>
         <div class="col-sm-3 bg-white m-3 h-100 p-5">
-            <p>Order ID</p>
+        <h6><b>Order ID</b></h6>
             <h1>{{ $transaction->code }}</h1>
             <hr>
             <div class="overflow-hidden" style="height: 100px;">
                 <img src="{{ Storage::url($transaction->event->image) }}" class="w-100" style="object-fit: cover;">
             </div>
+</br>
             <h3 class="font-weight-bold">{{ $transaction->event->name }}</h3>
             <h5 class="font-weight-bold">{{ date('D d-m-Y H:s', strtotime($transaction->event->time)) }}</h5>
             <p>
