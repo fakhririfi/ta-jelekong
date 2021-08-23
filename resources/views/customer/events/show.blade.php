@@ -2,11 +2,13 @@
 
 @section('main-content')
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800"><b>Acara Yang Tersedia</b></h1>
+
 
 <!-- Main Content goes here -->
-
+<div class="card11 bg-white p-5">
+    
 <div class="container-fluid">
+<h1 class="h3 mb-4 text-gray-800"><b>Acara Yang Tersedia</b></h1>
     <div class="row p-3 mb-3">
         <div class="col-sm-6 overflow-hidden" style="height: 400px;">
             <img src="{{ Storage::url($event->image) }}" class="foto w-100 foto" style="object-fit: cover;">
@@ -14,6 +16,7 @@
         <div class="col-sm-6" style="text-align: justify;">
             <h3 class="font-weight-bold">{{ $event->name }}</h3>
             <h4 class="font-weight-normal">{{ Carbon\Carbon::parse($event->time)->locale('id_ID')->isoFormat('LLLL') }}</h4>
+            <hr>
             <table class="table table-borderless">
             <tr>
                     <td>Tipe Acara</td>
@@ -51,6 +54,7 @@
             </button>
         </div>
     </div>
+</div>
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

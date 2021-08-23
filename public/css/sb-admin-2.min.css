@@ -203,3 +203,16 @@ a {
     border-radius: .35rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+.card11 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 30px;
+    max-width: 96%;
+}
