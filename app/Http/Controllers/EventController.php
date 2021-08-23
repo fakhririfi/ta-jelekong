@@ -31,7 +31,7 @@ class EventController extends Controller
             $events = Event::whereYear('time', $request->query('year'))
                 ->get();
         } else {
-            $events = Event::all();
+            $events = Event::where('schedule', false)->get();
         }
 
         return view('admin.events.index')->with([
@@ -51,7 +51,7 @@ class EventController extends Controller
 
         $filtered_events = [];
         if ($request->query('month') != null) {
-            $filtered_events = Event::whereMonth('time', $request->query('month'))->get();
+            $filtered_events = Event::whereMonth('time', $request->query('month'))->where('schedule', false)->get();
         }
 
         return view('customer.events.index')->with([
@@ -93,7 +93,7 @@ class EventController extends Controller
         }
 
         //category
-        $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran','Webinar','Seminar'];
+        $categories = ['Tari', 'Pentas Musik', 'Teater', 'Pameran', 'Webinar', 'Seminar'];
         $categoryData = [];
         foreach ($categories as $category) {
             $event = Event::where('category', $category)
