@@ -12,9 +12,10 @@
         <div class="col-sm-6 mb-4">
             <div class="card">
                 <div class="card-body2">
-                    <h5 class="card-title text-white font-weight-bold">{{ $article->title }}</h5>
+                    <h3 class="card-title text-white font-weight-bold">{{ $article->title }}</h3>
+                    <hr>
                     <p class="small text-white">{{ date('D d-m-Y H:s', strtotime($article->created_at)) }}</p>
-                    <a href="{{ route('customer.articles.show', $article->id) }}" class="btn btn-outline-light">Lihat</a>
+                    <a href="{{ route('customer.articles.show', $article->id) }}" class="btn3">Lihat</a>
                 </div>
             </div>
         </div>

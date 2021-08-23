@@ -35,6 +35,9 @@
                 <i class="fa fa-lg fa-edit"></i>
             </a>
         </div>
+
+    
+
     </div>
     @endforeach
 </div>

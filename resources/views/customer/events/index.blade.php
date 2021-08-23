@@ -18,6 +18,7 @@
         <div class="col-12 mb-3">
             <form action="" method="get">
                 <select name="month" class="form-control">
+                    <option selected="true" value="" disabled="disabled">Cari acara berdasarkan bulan</option>
                     <option value="1" {{ Request::get('month') == 1 ? 'selected' : '' }}>Januari</option>
                     <option value="2" {{ Request::get('month') == 2 ? 'selected' : '' }}>Februari</option>
                     <option value="3" {{ Request::get('month') == 3 ? 'selected' : '' }}>Maret</option>

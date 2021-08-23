@@ -10,7 +10,7 @@
     <div class="row p-3 mb-3 justify-content-left">
         <div class="col-sm-4 m-3 bg-white p-5">
         <h1 class="h3 mb-4 text-gray-800" style="text-align: left"><b>Cari Tiket</b></h1>
-            <p>Cek Pesanan Disini</p>
+           
             @if ($errors->any())
             <div class="alert alert-danger border-left-danger" role="alert">
                 <ul class="pl-4 my-2">
