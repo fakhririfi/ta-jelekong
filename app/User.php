@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'email', 'password',
+        'name', 'last_name', 'email', 'password', 'role',
     ];
 
     /**
@@ -45,5 +45,10 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return "{$this->name} {$this->last_name}";
+    }
+
+    public function hasRole($role)
+    {
+        return User::where(['role' => $role, 'id' => auth()->user()->id])->get();
     }
 }

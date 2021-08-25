@@ -11,6 +11,11 @@ use App\User;
 
 class AuthController extends Controller
 {
+    public function index(Request $request)
+    {
+        $user = User::all();
+        return view('roles.index', compact('user'));
+    }
 
     /**
      * Validate and create a newly registered user.
@@ -46,7 +51,7 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
@@ -58,12 +63,22 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $simpan = $user->save();
 
-        if($simpan){
+        if ($simpan) {
             Session::flash('success', 'Register berhasil! Silahkan login untuk mengakses data');
             return redirect()->route('login');
         } else {
             Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi']);
             return redirect()->route('register');
         }
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->role = $request->role;
+        $user->save();
+        return redirect()->back()->with([
+            'success' => 'Berhasil Menyimpan'
+        ]);
     }
 }
