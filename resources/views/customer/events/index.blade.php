@@ -2,6 +2,18 @@
 
 @section('main-content')
 <!-- Page Heading -->
+<div class="card7 mb-3 p-3 bg-white">
+                <h4><b>Informasi</b></h4>
+                <ol>
+                    <li><b>Filter event:</b> Cari event yang diinginkan berdasarkan bulan</b></li>
+                    <li><b>Event yang tersedia:</b> Event yang ada dalam kurun waktu 10 hari ke depan</li>
+                    <li><b>Event yang akan datang:</b> Event yang akan diselenggarakan</li>
+
+                </ol>
+            </div>
+
+            <br>
+
 <h1 class=""><b>{{ __('List event') }}</b></h1>
 
 <!-- Main Content goes here -->
@@ -12,7 +24,7 @@
 
     <div class="row p-3 mb-3">
         <div class="col-12">
-            <h3 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 15%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Filter Event</h3>
+            <h4 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 15%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Filter Event</h4>
 
         </div>
         <div class="col-12 mb-3">
@@ -56,7 +68,7 @@
 <hr>
     <div class="row p-3 mb-3">
         <div class="col-12">
-        <h3 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 25%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Acara Yang Tersedia</h3>
+        <h4 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 25%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Acara Yang Tersedia</h4>
         </div>
         <div class="owl-carousel col-12">
             @foreach($current_events as $event)
@@ -79,7 +91,7 @@
 <hr>
     <div class="row p-3 mb-3">
         <div class="col-12">
-        <h3 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 30%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Acara Yang Akan Datang</h3>
+        <h4 class="font-weight-bold text-primary mb-4" style="background-color: #ececec;border-radius: 10px;width: 30%;/*! padding: -3.5rem; */text-align: center;padding: 0.5rem;">Acara Yang Akan Datang</h4>
         </div>
         <div class="owl-carousel col-12">
             @foreach($future_events as $event)

@@ -2,12 +2,12 @@
 
 @section('main-content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('User Management') }}</h1>
+    <center><h1 class="h3 mb-4 text-gray-800"><b>{{ __('User Management') }}</b></h1></center>
 
     <!-- Main Content goes here -->
 
     <div class="container-fluid">
-        <div class="card card-default">
+        <div class="card7 card-default">
             <div class="card-body p-0 table-responsive">
                 <table class="table table-bordered table-striped table-hover mb-0">
                     <thead>

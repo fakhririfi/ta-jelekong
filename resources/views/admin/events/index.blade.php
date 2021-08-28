@@ -4,6 +4,17 @@
 
 <!-- Main Content goes here -->
 
+<div class="card7 mb-3 p-3 bg-white">
+                <h6><b>Peraturan untuk Admin</b></h6>
+                <ol>
+                    <li>Event yang sudah dipesan oleh costumer <b>tidak dapat dihapus</b></li>
+                    <li>Pastikan tidak membuat event yang berunsur <b>SARA</b></li>
+                    <li>Gunakan bahasa yang <b>sopan dan jelas</b> dalam pembuatan event</li>
+
+                </ol>
+            </div>
+
+            <br>
 <div class="container-fluid">
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800"><b>{{ __('List Event') }}</b></h1>
@@ -12,7 +23,7 @@
         <div class="row">   
         <div class="col-sm-6">
             
-        <h3 class="mb-4 text-gray-600">List Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h3>
+        <h4 class="mb-4 text-gray-600">List Event untuk tahun {{ Request::get('year') ?? date('Y') }}</h4>
         </div>
         <div class="col-sm-6">
             <form action="" method="get" class="text-right">
@@ -27,14 +38,16 @@
         </div>
     </div>
 
+
+<hr>
     @foreach($events as $event)
     <div class="row bg-primary2 text-white p-3 mb-3">
         <div class="col-10">
-        <h3 class="mb-0">#{{ $loop->iteration }} {{ $event->name }}</h3>
+        <h4 class="mb-0">#{{ $loop->iteration }} {{ $event->name }}</h4>
         </div>
         <div class="col-1">
             <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">
-                <i class="fa fa-lg fa-edit"> Edit </i>
+                <i class="fa fa-lg fa-edit"></i>
             </a>
         </div>
         <div class="col-1">
@@ -42,7 +55,7 @@
                 @csrf
                 @method('delete')
                 <button type="submit" onclick="return confirm('Apakah Anda Yakin ?')" class="btn btn-primary2">
-                    <i class="fa fa-minus-circle"> Hapus </i>
+                    <i class="fa fa-minus-circle"></i>
                 </button>
             </form>
         </div>

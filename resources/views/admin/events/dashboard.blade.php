@@ -64,14 +64,29 @@
     <div class="col-sm-4">
         <div class="card7 shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary2">Kategori</h6>
-            </div>
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myPieChart"></canvas>
+            <h6 class="m-0 font-weight-bold text-primary">Kategori</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="myPieChart"></canvas>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="row mb-3">
+            <div class="col-sm-12">
+                <div class="card7 shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jumlah Pengurus</div>
+                                <div class="h1 mb-0 font-weight-bold text-gray-800">{{ $administrator_count }}</div>
+                                <p small>Pengurus</p>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
     </div>
 </div>
 @endsection
