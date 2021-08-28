@@ -91,6 +91,20 @@
             <input name="quota" type="number" class="form-control" placeholder="Masukkan jumlah kuota acara">
         </div>
     </div>
+
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Jumlah Pengurus</label>
+        <div class="col-sm-10">
+            <input name="administrator_count" type="number" class="form-control">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">List Pengurus</label>
+        <div class="col-sm-10">
+            <textarea name="administrators" class="form-control" rows="8"></textarea>
+        </div>
+    </div>
+
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Unggah</label>
         <div class="col-sm-10">

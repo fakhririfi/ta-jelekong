@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOrganizerToEventsTable extends Migration
+class AddAdministratorToEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddOrganizerToEventsTable extends Migration
     public function up()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->string('organizer')->after('quota');
+            $table->integer('administrator_count');
+            $table->text('administrators');
         });
     }
 
@@ -26,7 +27,7 @@ class AddOrganizerToEventsTable extends Migration
     public function down()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn("organizer");
+            $table->dropColumn(['administrator_count', 'administrators']);
         });
     }
 }

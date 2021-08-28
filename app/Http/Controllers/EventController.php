@@ -93,12 +93,21 @@ class EventController extends Controller
             array_push($categoryData, $event);
         }
 
+    //administrator counts
+    $administrator_count = 0;
+    $events = Event::whereYear('time', $year)
+        ->get();
+    foreach ($events as $event) {
+        $administrator_count += $event->administrator_count;
+    }
+
         return view('admin.events.dashboard')->with([
             'countData' => json_encode($countData),
             'organizer' => json_encode($organizer),
             'organizerCount' => json_encode($organizerCount),
             'categories' => json_encode($categories),
             'categoryData' => json_encode($categoryData),
+            'administrator_count' => $administrator_count,
         ]);
     }
 
@@ -132,7 +141,9 @@ class EventController extends Controller
             'quota' => 'required',
             'image' => 'required',
             'organizer' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'administrator_count' => 'required',
+            'administrators' => 'required'
         ]);
 
         $path = $request->file('image')->store('events', 'public');
@@ -148,7 +159,9 @@ class EventController extends Controller
             'quota' => $request->quota,
             'organizer' => $request->organizer,
             'image' => $path,
-            'type' => $request->type
+            'type' => $request->type,
+            'administrator_count' => $request->administrator_count,
+            'administrators' => $request->administrators
         ]);
 
         if ($event) {
@@ -228,7 +241,9 @@ class EventController extends Controller
             'organizer' => 'required',
             'price' => 'required',
             'quota' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'administrator_count' => 'required',
+            'administrators' => 'required'
         ]);
 
         $path = $event->image;
@@ -247,7 +262,9 @@ class EventController extends Controller
             'organizer' => $request->organizer,
             'quota' => $request->quota,
             'image' => $path,
-            'type' => $request->type
+            'type' => $request->type,
+            'administrator_count' => $request->administrator_count,
+            'administrators' => $request->administrators
         ]);
 
         if ($event) {

@@ -22,6 +22,8 @@ class Event extends Model
         'organizer',
         'category',
         'contact_person',
-        'type'
+        'type',
+        'administrator_count',
+        'administrators'
     ];
 }
