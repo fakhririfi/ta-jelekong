@@ -25,7 +25,9 @@ class Event extends Model
         'contact_person',
         'user_id',
         'schedule',
-        'type'
+        'type',
+        'administrator_count',
+        'administrators'
     ];
     public function tahaps()
     {
