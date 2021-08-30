@@ -40,13 +40,13 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'              => 'required',
+            'name'              => 'required|max:255',
             'time'              => 'required',
             'end'               => 'required',
-            'location'          => 'required',
+            'location'          => 'required|max:255',
             'description'       => 'required',
-            'contact_person'    => 'required',
-            'organizer'         => 'required'
+            'contact_person'    => 'required|max:255',
+            'organizer'         => 'required|max:255'
         ]);
 
         $array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"), true);
@@ -127,13 +127,13 @@ class ScheduleController extends Controller
     {
 
         $this->validate($request, [
-            'name'              => 'required',
+            'name'              => 'required|max:255',
             'time'              => 'required',
             'end'               => 'required',
-            'location'          => 'required',
+            'location'          => 'required|max:255',
             'description'       => 'required',
-            'contact_person'    => 'required',
-            'organizer'         => 'required'
+            'contact_person'    => 'required|max:255',
+            'organizer'         => 'required|max:255'
         ]);
 
         $array = json_decode(file_get_contents("https://raw.githubusercontent.com/guangrei/Json-Indonesia-holidays/master/calendar.json"), true);

@@ -44,7 +44,7 @@ class ManageEventController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama' => 'required',
+            'nama' => 'required|max:255',
             'event_id' => 'required'
         ]);
 
@@ -67,7 +67,7 @@ class ManageEventController extends Controller
     public function storeDetail(Request $request)
     {
         $this->validate($request, [
-            'nama' => 'required',
+            'nama' => 'required|max:255',
             'tahap_id' => 'required'
         ]);
 
@@ -141,7 +141,7 @@ class ManageEventController extends Controller
             ]);
         }
         $this->validate($request, [
-            'nama' => 'required',
+            'nama' => 'required|max:255',
         ]);
 
         $checkList =  DetailCheckList::create([
@@ -249,6 +249,15 @@ class ManageEventController extends Controller
     }
     public function updateDetail(Request $request, $id)
     {
+        $check = DetailMember::where('user_id', $request->user()->id)
+            ->where('detail_tahap_id', $id)
+            ->first();
+
+        if (!$check) {
+            return redirect()->back()->withErrors([
+                'error' => 'Tidak bisa mengubah detail karena anda bukan member'
+            ]);
+        }
         DetailTahap::where('id', $id)
             ->update(['nama' => $request->nama, 'deskripsi' => $request->deskripsi]);
         return redirect()->back()->with([
@@ -257,7 +266,17 @@ class ManageEventController extends Controller
     }
     public function toggleChecklist($id, Request $request)
     {
+
         $checklist = DetailCheckList::where('id', $id)->first();
+        $check = DetailMember::where('user_id', $request->user()->id)
+            ->where('detail_tahap_id', $checklist->detail_tahap_id)
+            ->first();
+
+        if (!$check) {
+            return redirect()->back()->withErrors([
+                'error' => 'Tidak bisa mengubah karena anda bukan member'
+            ]);
+        }
         DetailCheckList::where('id', $id)
             ->update(['completed' => !$checklist->completed]);
         return redirect()->back()->with([
@@ -281,9 +300,18 @@ class ManageEventController extends Controller
             'success' => "Berhasil Menghapus"
         ]);
     }
-    public function destroyDetail($id)
+    public function destroyDetail($id, Request $request)
     {
-        $detail = DetailTahap::where('id', $id);
+        $detail = DetailTahap::where('id', $id)->first();
+        $check = DetailMember::where('user_id', $request->user()->id)
+            ->where('detail_tahap_id', $id)
+            ->first();
+
+        if (!$check && $request->user()->role != "admin") {
+            return redirect()->back()->withErrors([
+                'error' => 'Tidak bisa menghapus karena anda bukan member'
+            ]);
+        }
         $detail->delete();
 
         return redirect()->back()->with([
@@ -292,7 +320,16 @@ class ManageEventController extends Controller
     }
     public function destroyChecklist($id, Request $request)
     {
-        $checklist = DetailCheckList::where('id', $id);
+        $checklist =  DetailCheckList::where('id', $id)->first();
+        $check = DetailMember::where('user_id', $request->user()->id)
+            ->where('detail_tahap_id', $checklist->detail_tahap_id)
+            ->first();
+
+        if (!$check) {
+            return redirect()->back()->withErrors([
+                'error' => 'Tidak bisa menghapus karena anda bukan member'
+            ]);
+        }
         $checklist->delete();
 
         return redirect()->back()->with([

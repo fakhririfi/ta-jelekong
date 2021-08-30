@@ -18,7 +18,7 @@ class CreateDetailTahapsTable extends Migration
             $table->string('nama');
             $table->datetime('time')->nullable();
             $table->datetime('end')->nullable();
-            $table->string('deskripsi')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->string('attachment')->nullable();
             $table->foreignId('tahap_id')->constrained()->cascadeOnDelete();
         });

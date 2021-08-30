@@ -290,7 +290,8 @@
             {{ session('status') }}
         </div>
     @endif
-
+@endpush
+@push('js')
     <script>
         var SITEURL = "{{ url('/admin/manageevent') }}";
         $.ajaxSetup({

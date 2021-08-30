@@ -17,19 +17,18 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
-        $events = Event::all();
+        $events = Event::where('schedule', false)->get();
 
         return view('admin.articles.index')->with([
             'articles' => $articles,
             'events' => $events
         ]);
-
     }
 
     public function index_customer()
     {
         $articles = Article::whereDate('post_date', '<=', Carbon::now())
-                            ->get();
+            ->get();
 
         return view('customer.articles.index')->with([
             'articles' => $articles
@@ -69,7 +68,7 @@ class ArticleController extends Controller
         $path = $request->file('image')->store('articles', 'public');
 
         $event_id = null;
-        if(isset($request->event_id)){
+        if (isset($request->event_id)) {
             $event_id = $request->event_id;
         }
 
@@ -107,14 +106,14 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        if(!Carbon::parse($article->post_date)->isPast()){
+        if (!Carbon::parse($article->post_date)->isPast()) {
             return redirect(route('customer.articles.index'))->withErrors([
                 'error' => 'Tidak dapat membuka artikel'
             ]);
         }
 
         $event = null;
-        if($article->event_id != null){
+        if ($article->event_id != null) {
             $event = Event::find($article->event_id);
         }
 
@@ -134,7 +133,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        if(!$article){
+        if (!$article) {
             return redirect()->back()->withErrors([
                 'events' => 'data tidak ditemukan'
             ]);
@@ -164,12 +163,12 @@ class ArticleController extends Controller
         ]);
 
         $path = $article->image;
-        if(isset($request->image)){
+        if (isset($request->image)) {
             $path = $request->file('image')->store('events', 'public');
         }
 
         $event_id = null;
-        if(isset($request->event_id)){
+        if (isset($request->event_id)) {
             $event_id = $request->event_id;
         }
 
@@ -212,7 +211,7 @@ class ArticleController extends Controller
         $article->increment('share_count');
 
         return [
-			'status' => true
-		];
+            'status' => true
+        ];
     }
 }
